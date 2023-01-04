@@ -1,9 +1,9 @@
 spring:
   datasource:
-    driver-class-name: org.h2.Driver
-    url: jdbc:h2:mem:novelist
-    username: sa
-    password: 
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/novelist
+    username: novelist
+    password: password
 
   h2:
     console:
