@@ -10,6 +10,7 @@ import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.lang.reflect.Type;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -33,6 +34,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.context.MessageSource;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.modelmapper.TypeToken;
+import org.springframework.http.MediaType;
+
+import com.fasterxml.jackson.dataformat.csv.CsvMapper;
+import com.fasterxml.jackson.dataformat.csv.CsvSchema;
 
 import com.example.novelist.entity.Topic;
 import com.example.novelist.entity.UserInf;
@@ -43,7 +50,7 @@ import com.example.novelist.entity.Favorite;
 import com.example.novelist.form.FavoriteForm;
 import com.example.novelist.entity.Comment;
 import com.example.novelist.form.CommentForm;
-
+import com.example.novelist.bean.TopicCsv;
 
 @Controller
 public class TopicsController {
@@ -213,4 +220,17 @@ public class TopicsController {
         return destFile;
     }
 
+    @RequestMapping(value = "/topics/topic.csv", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE
+            + "; charset=UTF-8; Content-Disposition: attachment")
+    @ResponseBody
+    public Object downloadCsv() throws IOException {
+        Iterable<Topic> topics = repository.findAll();
+        Type listType = new TypeToken<List<TopicCsv>>() {
+        }.getType();
+        List<TopicCsv> csv = modelMapper.map(topics, listType);
+        CsvMapper mapper = new CsvMapper();
+        CsvSchema schema = mapper.schemaFor(TopicCsv.class).withHeader();
+
+        return mapper.writer(schema).writeValueAsString(csv);
+    }
 }
