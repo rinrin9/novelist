@@ -22,6 +22,24 @@ spring:
           github:
             clientId: ${github.client.id}
             clientSecret: ${github.client.secret}
+  mail:
+    default-encoding: UTF-8
+    protocol: smtp
+    host: ${spring.mail.host}
+    port: ${spring.mail.port}
+    username: ${spring.mail.username}
+    password: ${spring.mail.password}
+    properties: 
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+  thymeleaf:
+    check-template-location: false
+googlemap:
+  key: ${googlemap.key}                  
+            
 image:
   local: true
 onesignal:

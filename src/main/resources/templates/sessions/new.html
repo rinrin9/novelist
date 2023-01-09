@@ -23,6 +23,7 @@
             <input class="form-control" type="password" name="password" id="session_password" />
           </div>
           <input type="submit" value="ログイン" class="btn w-100 btn-outline-light" th:value="#{sessions.new.submit}"/>
+          
         </form>
       </main>
     </div>
@@ -31,12 +32,12 @@
        <div class="row">
        <div class="col-md-4 mx-auto">
            <div class="mb-3">
-           <a class="btn w-100 btn-social btn-google text-center" href="/oauth2/authorization/google">
+           <a class="btn w-100 btn-social btn-google text-center" href="/novelist/oauth2/authorization/google">
                <span class="bi bi-google"></span><span th:text="#{sessions.new.login_google}" />
            </a>
            </div>
            <div class="mb-3">
-             <a class="btn w-100 btn-social btn-github text-center" href="/oauth2/authorization/github">
+             <a class="btn w-100 btn-social btn-github text-center" href="/novelist/oauth2/authorization/github">
                <span class="bi bi-github"></span><span th:text="#{sessions.new.login_github}" />
              </a>
            </div>

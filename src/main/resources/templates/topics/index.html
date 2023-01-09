@@ -33,7 +33,11 @@
               <ul th:each="comment : ${topic.comments}">
                 <li><pre class="description" th:text="${comment.description}"></pre></li>
               </ul>
+            <a href="/topics/topic.csv">
+              <button type="button" name="name" value="value">CSV</button>
+            </a>
             </div>
+            
           </main>
         </div>
       </div>
