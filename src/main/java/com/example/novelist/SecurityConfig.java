@@ -69,9 +69,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .invalidateHttpSession(true).permitAll().and().csrf()
                 .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
                 // form
-                .and().formLogin().loginPage("/login").defaultSuccessUrl("/topics").failureUrl("/login-failure")
+                .and().formLogin().loginPage("/login").defaultSuccessUrl("/top").failureUrl("/login-failure")
                 // oauth2
-                .and().oauth2Login().loginPage("/login").defaultSuccessUrl("/topics").failureUrl("/login-failure")
+                .and().oauth2Login().loginPage("/login").defaultSuccessUrl("/top").failureUrl("/login-failure")
                 .permitAll()
                 .userInfoEndpoint(userInfoEndpoint -> userInfoEndpoint
                 .oidcUserService(this.oidcUserService())
