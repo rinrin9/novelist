@@ -35,7 +35,10 @@ public class Topic extends AbstractEntity implements Serializable {
 
     @Column(nullable = false, length = 1000)
     private String description;
-
+    
+    @Column(nullable = false, length = 50)
+    private String title;
+    
     @Column
     private Double latitude;
 

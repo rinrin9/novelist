@@ -26,6 +26,10 @@ public class TopicForm {
     private String imageData;
 
     private String path;
+    
+    @NotEmpty
+    @Size(max = 50)
+    private String title;
 
     @NotEmpty
     @Size(max = 1000)

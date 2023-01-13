@@ -27,6 +27,7 @@
                 <img src="/images/icons/comment.png" th:src="@{/images/icons/comment.png}" />
               </a>
             </div>
+            <pre class="title" th:text="${topic.title}"></pre>
             <pre class="description" th:text="${topic.description}"></pre>
             <div class="comments">
               <h3 class='text-center' th:text="#{topics.index.comment}">コメント</h3>

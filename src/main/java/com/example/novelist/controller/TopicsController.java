@@ -195,6 +195,7 @@ public class TopicsController {
             entity.setPath("");
         }
         entity.setDescription(form.getDescription());
+        entity.setTitle(form.getTitle());
         repository.saveAndFlush(entity);
 
         redirAttrs.addFlashAttribute("hasMessage", true);

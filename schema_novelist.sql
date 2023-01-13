@@ -18,6 +18,7 @@ CREATE TABLE IF NOT EXISTS topic (
   id SERIAL NOT NULL,
   user_id INT NOT NULL,
   path VARCHAR(255) NOT NULL,
+  title VARCHAR(50) NOT NULL,
   description VARCHAR(1000) NOT NULL,
   latitude VARCHAR(20),
   longitude VARCHAR(20),
@@ -43,6 +44,7 @@ ALTER TABLE favorite ADD CONSTRAINT FK_favorite_topic FOREIGN KEY (topic_id) REF
 CREATE TABLE IF NOT EXISTS comment (
   id SERIAL NOT NULL,
   topic_id INT NOT NULL,
+  title VARCHAR(50) NOT NULL,
   description VARCHAR(1000) NOT NULL,
   created_at TIMESTAMP NOT NULL,
   updated_at TIMESTAMP NOT NULL,
