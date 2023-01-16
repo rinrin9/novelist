@@ -10,6 +10,7 @@ import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 import java.lang.reflect.Type;
 
 import javax.servlet.http.HttpServletRequest;
@@ -28,6 +29,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -159,6 +161,18 @@ public class TopicsController {
             break;
         }
         return mimeType;
+    }
+
+    @RequestMapping(value = "/topics/{id}")
+    public String show(@PathVariable("id") long id, Principal principal, Model model) throws IOException {
+        Authentication authentication = (Authentication) principal;
+        UserInf user = (UserInf) authentication.getPrincipal();
+
+        Optional<Topic> topic = repository.findById(id);
+        TopicForm form = getTopic(user, topic.get());
+        model.addAttribute("topic", form);
+
+        return "topics/show";
     }
 
     @GetMapping(path = "/topics/new")
