@@ -13,10 +13,6 @@
         <div class="col-md-6 mx-auto">
           <main>
             <h2 class="author" th:text="${topic.user.name}"></h2>
-              <a th:href="@{'/topics/{id}'(id=${topic.id})}">
-                <img src="" th:if="${@environment.getProperty('image.local')}" th:src="${topic.imageData}" class="image" />
-                <img src="" th:unless="${@environment.getProperty('image.local')}" th:src="${topic.path}" class="image" />
-              </a>
             <div class="icons">
               <a th:if="${topic.favorite != null}" rel="nofollow" class="icon convert" data-method="delete" href="/favorite?topic_id=1" th:href="@{'/favorite'}" th:data-topic_id="${topic.id}" th:data-_csrf="${_csrf.token}">
                 <img class="favorite-on" src="/images/icons/heart.png" th:src="@{/images/icons/heart.png}" />  
@@ -30,7 +26,6 @@
               </a>
             </div>
             <a class="title" th:text="${topic.title}" th:href="@{'/topics/{id}'(id=${topic.id})}"></a>
-            <pre class="description" th:text="${topic.description}"></pre>
             <div class="comments">
               <h3 class='text-center' th:text="#{topics.index.comment}">コメント</h3>
               <ul th:each="comment : ${topic.comments}">

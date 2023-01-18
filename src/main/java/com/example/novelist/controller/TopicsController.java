@@ -174,6 +174,23 @@ public class TopicsController {
 
         return "topics/show";
     }
+    
+    @GetMapping(path = "/topics/top")
+    public String topTopic(Principal principal, Model model) throws IOException {
+    	Authentication authentication = (Authentication) principal;
+        UserInf user = (UserInf) authentication.getPrincipal();
+        
+        List<Topic> topics = repository.findByUserId(user.getUserId());
+        List<TopicForm> list = new ArrayList<>();
+        for (Topic entity : topics) {
+            TopicForm form = getTopic(user, entity);
+            list.add(form);
+        }
+        model.addAttribute("list", list);
+
+        
+        return "topics/index";
+    }
 
     @GetMapping(path = "/topics/new")
     public String newTopic(Model model) {

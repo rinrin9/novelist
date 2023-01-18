@@ -15,6 +15,11 @@
         <ul class="navbar-nav ms-auto">
           <th:block sec:authorize="isAuthenticated()">
             <li class="nav-item">
+              <a class="nav-link" th:href="@{/topics/top}">
+                <img src="/images/icons/home.png" th:src="@{/images/icons/home.png}">
+              </a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" th:href="@{/topics}">
                 <img src="/images/icons/camera.png" th:src="@{/images/icons/camera.png}">
               </a>
