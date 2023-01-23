@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
@@ -46,6 +47,7 @@ import com.fasterxml.jackson.dataformat.csv.CsvSchema;
 import com.example.novelist.entity.Topic;
 import com.example.novelist.entity.UserInf;
 import com.example.novelist.form.TopicForm;
+import com.example.novelist.form.TopicUpdateForm;
 import com.example.novelist.form.UserForm;
 import com.example.novelist.repository.TopicRepository;
 import com.example.novelist.entity.Favorite;
@@ -189,12 +191,15 @@ public class TopicsController {
         model.addAttribute("list", list);
 
         
-        return "topics/index";
+        return "topics/home";
     }
 
+
+    
     @GetMapping(path = "/topics/new")
     public String newTopic(Model model) {
         model.addAttribute("form", new TopicForm());
+        
         return "topics/new";
     }
 
@@ -251,12 +256,78 @@ public class TopicsController {
 
         return destFile;
     }
+    
+    @RequestMapping(value = "/topics/edit/{id}")
+    public String edit(@PathVariable("id") long id, Principal principal, Model model) throws IOException {
+    	
+        Authentication authentication = (Authentication) principal;
+        UserInf user = (UserInf) authentication.getPrincipal();
 
+        Optional<Topic> topic = repository.findById(id);
+        TopicForm form = getTopic(user, topic.get());
+        model.addAttribute("form", form);
+
+
+        return "topics/edit";
+    }
+    
+    @RequestMapping(value = "/topics/edit", method = RequestMethod.POST)
+    public String update(Principal principal, @Validated @ModelAttribute("form") TopicUpdateForm form, BindingResult result,
+    		Model model, @RequestParam(name="image", required = false) MultipartFile image, RedirectAttributes redirAttrs, Locale locale)
+            throws IOException {
+        if (result.hasErrors()) {
+            model.addAttribute("hasMessage", true);
+            model.addAttribute("class", "alert-danger");
+            model.addAttribute("message", messageSource.getMessage("topics.create.flash.1", new String[] {}, locale));
+            return "topics/edit";
+        }
+
+        boolean isImageLocal = false;
+        if (imageLocal != null) {
+            isImageLocal = new Boolean(imageLocal);
+        }
+
+        Topic entity =repository.findById(form.getId()).get();
+        Authentication authentication = (Authentication) principal;
+        UserInf user = (UserInf) authentication.getPrincipal();
+        entity.setUserId(user.getUserId());
+        
+        if (!image.isEmpty()) {
+        	File destFile = null;
+        	if (isImageLocal) {
+        		destFile = saveImageLocal(image, entity);
+        		entity.setPath(destFile.getAbsolutePath());
+        	} else {
+        		entity.setPath("");
+        	}
+        }
+        entity.setDescription(form.getDescription());
+        entity.setTitle(form.getTitle());
+        repository.saveAndFlush(entity);
+
+        redirAttrs.addFlashAttribute("hasMessage", true);
+        redirAttrs.addFlashAttribute("class", "alert-info");
+        redirAttrs.addFlashAttribute("message", messageSource.getMessage("topics.create.flash.2", new String[] {}, locale));
+
+        return "redirect:/topics/top";
+    }
+
+    @RequestMapping(value = "/topics/delete/{id}")
+    public String delete(@PathVariable("id") long id, Principal principal, Model model, RedirectAttributes redirAttrs) throws IOException {
+
+        repository.deleteById(id);
+        //お気に入り削除
+        //コメント削除
+        
+        return "redirect:/topics/top";
+    }
+    
     @RequestMapping(value = "/topics/topic.csv", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE
             + "; charset=UTF-8; Content-Disposition: attachment")
     @ResponseBody
-    public Object downloadCsv() throws IOException {
+    public Object downloadCsv(@PathVariable("id") long id) throws IOException {
         Iterable<Topic> topics = repository.findAll();
+        //Optional<Topic> topics = repository.findById(id);
         Type listType = new TypeToken<List<TopicCsv>>() {
         }.getType();
         List<TopicCsv> csv = modelMapper.map(topics, listType);

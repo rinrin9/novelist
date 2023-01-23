@@ -31,7 +31,7 @@
               <ul th:each="comment : ${topic.comments}">
                 <li><pre class="description" th:text="${comment.description}"></pre></li>
               </ul>
-            <a href="/topics/topic.csv">
+            <a th:href="@{'/topics/topic.csv/{id}'(id=${topic.id})}">
               <button type="button" name="name" value="value">CSV</button>
             </a>
             </div>

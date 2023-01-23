@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout}">
+<head>
+<title>Novelist</title>
+</head>
+<body>
+	<div class="topics-index-wrapper" layout:fragment="contents">
+		<div class="container">
+		    <div class="row">
+		        <h1 class="col-md-5 mx-auto" th:text="#{topic.home.list}"></h1>
+		    </div>
+			<div class="row" th:each="topic : ${list}">
+				<div class="col-md-6 mx-auto">
+					<main>
+						<a class="titles" th:text="#{topics.title}"></a> 
+						<a class="titles"
+							th:text="${topic.title}"
+							th:href="@{'/topics/{id}'(id=${topic.id})}"></a>
+						<div class="edit">
+							<a th:text="#{topics.new.edit}"
+							   th:href="@{'/topics/edit/{id}'(id=${topic.id})}"></a> 
+							<a th:text="#{topics.new.delete}"
+							   th:href="@{'/topics/delete/{id}'(id=${topic.id})}"></a>
+						</div>
+					</main>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
