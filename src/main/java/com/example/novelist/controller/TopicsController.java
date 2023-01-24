@@ -241,6 +241,45 @@ public class TopicsController {
         return "redirect:/topics";
     }
 
+    @RequestMapping(value = "/topic/keep", method = RequestMethod.POST)
+    public String keep(Principal principal, @Validated @ModelAttribute("form") TopicForm form, BindingResult result,
+    		Model model, @RequestParam MultipartFile image, RedirectAttributes redirAttrs, Locale locale)
+            throws IOException {
+        if (result.hasErrors()) {
+            model.addAttribute("hasMessage", true);
+            model.addAttribute("class", "alert-danger");
+            model.addAttribute("message", messageSource.getMessage("topics.create.flash.1", new String[] {}, locale));
+            return "topics/new";
+        }
+
+        boolean isImageLocal = false;
+        if (imageLocal != null) {
+            isImageLocal = new Boolean(imageLocal);
+        }
+
+        Topic entity = new Topic();
+        Authentication authentication = (Authentication) principal;
+        UserInf user = (UserInf) authentication.getPrincipal();
+        entity.setUserId(user.getUserId());
+        File destFile = null;
+        if (isImageLocal) {
+            destFile = saveImageLocal(image, entity);
+            entity.setPath(destFile.getAbsolutePath());
+        } else {
+            entity.setPath("");
+        }
+        entity.setDescription(form.getDescription());
+        entity.setTitle(form.getTitle());
+        entity.setKeep(true);
+        repository.saveAndFlush(entity);
+
+        redirAttrs.addFlashAttribute("hasMessage", true);
+        redirAttrs.addFlashAttribute("class", "alert-info");
+        redirAttrs.addFlashAttribute("message", messageSource.getMessage("topics.create.flash.2", new String[] {}, locale));
+
+        return "redirect:/topics";
+    }
+    
     private File saveImageLocal(MultipartFile image, Topic entity) throws IOException {
         File uploadDir = new File("/uploads");
         uploadDir.mkdir();
@@ -256,7 +295,7 @@ public class TopicsController {
 
         return destFile;
     }
-    
+     
     @RequestMapping(value = "/topics/edit/{id}")
     public String edit(@PathVariable("id") long id, Principal principal, Model model) throws IOException {
     	
@@ -316,8 +355,6 @@ public class TopicsController {
     public String delete(@PathVariable("id") long id, Principal principal, Model model, RedirectAttributes redirAttrs) throws IOException {
 
         repository.deleteById(id);
-        //お気に入り削除
-        //コメント削除
         
         return "redirect:/topics/top";
     }
@@ -326,10 +363,11 @@ public class TopicsController {
             + "; charset=UTF-8; Content-Disposition: attachment")
     @ResponseBody
     public Object downloadCsv(@PathVariable("id") long id) throws IOException {
-        Iterable<Topic> topics = repository.findAll();
+    	Optional<Topic> topics = repository.findById(id);
         //Optional<Topic> topics = repository.findById(id);
         Type listType = new TypeToken<List<TopicCsv>>() {
         }.getType();
+        
         List<TopicCsv> csv = modelMapper.map(topics, listType);
         CsvMapper mapper = new CsvMapper();
         CsvSchema schema = mapper.schemaFor(TopicCsv.class).withHeader();

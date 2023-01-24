@@ -24,6 +24,7 @@ CREATE TABLE IF NOT EXISTS topic (
   longitude VARCHAR(20),
   created_at TIMESTAMP NOT NULL,
   updated_at TIMESTAMP NOT NULL,
+  keep bool NOT NULL,
   PRIMARY KEY (id)
 );
 

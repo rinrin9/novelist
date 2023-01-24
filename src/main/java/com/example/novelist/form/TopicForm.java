@@ -34,6 +34,8 @@ public class TopicForm {
     @NotEmpty
     @Size(max = 1000)
     private String description;
+    
+    private boolean keep = false;
 
     private UserForm user;
     

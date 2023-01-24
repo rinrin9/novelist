@@ -3,6 +3,7 @@ package com.example.novelist.entity;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -44,16 +45,18 @@ public class Topic extends AbstractEntity implements Serializable {
 
     @Column
     private Double longitude;
+    
+    private boolean keep = false;
 
     @ManyToOne
     @JoinColumn(name = "userId", insertable = false, updatable = false)
     private User user;
     
-    @OneToMany
+    @OneToMany(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "topicId", insertable = false, updatable = false)
     private List<Favorite> favorites;
     
-    @OneToMany
+    @OneToMany(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "topicId", insertable = false, updatable = false)
     private List<Comment> comments;
     
