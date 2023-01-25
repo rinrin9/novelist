@@ -8,9 +8,9 @@
 <body>
 	<div class="topics-index-wrapper" layout:fragment="contents">
 		<div class="container">
-		    <div class="row">
-		        <h1 class="col-md-5 mx-auto" th:text="#{topic.home.list}"></h1>
-		    </div>
+			<div class="row">
+				<h1 class="col-md-5 mx-auto" th:text="#{topic.home.list}"></h1>
+			</div>
 			<div class="row" th:each="topic : ${list}">
 				<div class="col-md-6 mx-auto">
 					<main>
@@ -20,9 +20,19 @@
 							th:href="@{'/topics/{id}'(id=${topic.id})}"></a>
 						<div class="edit">
 							<a th:text="#{topics.new.edit}"
-							   th:href="@{'/topics/edit/{id}'(id=${topic.id})}"></a> 
+								th:href="@{'/topics/edit/{id}'(id=${topic.id})}"></a>
 							<a th:text="#{topics.new.delete}"
-							   th:href="@{'/topics/delete/{id}'(id=${topic.id})}"></a>
+								th:href="@{'/topics/delete/{id}'(id=${topic.id})}"></a>
+						</div>
+						<div class=release>
+						    <th:block th:if="${topic.keep == true}">
+						        非公開 
+						    </th:block>
+						</div>
+						<div class=private>
+						    <th:block th:if="${topic.keep == false}">
+						        公開中 
+						    </th:block>
 						</div>
 					</main>
 				</div>

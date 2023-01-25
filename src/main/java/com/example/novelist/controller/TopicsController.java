@@ -182,7 +182,7 @@ public class TopicsController {
     	Authentication authentication = (Authentication) principal;
         UserInf user = (UserInf) authentication.getPrincipal();
         
-        List<Topic> topics = repository.findByUserId(user.getUserId());
+        List<Topic> topics = repository.findByUserIdOrderByUpdatedAtDesc(user.getUserId());
         List<TopicForm> list = new ArrayList<>();
         for (Topic entity : topics) {
             TopicForm form = getTopic(user, entity);
@@ -277,8 +277,53 @@ public class TopicsController {
         redirAttrs.addFlashAttribute("class", "alert-info");
         redirAttrs.addFlashAttribute("message", messageSource.getMessage("topics.create.flash.2", new String[] {}, locale));
 
-        return "redirect:/topics";
+        return "redirect:/topics/top";
     }
+    
+    @RequestMapping(value = "/topics/keepupdate", method = RequestMethod.POST)
+    public String keepupdate(Principal principal, @Validated @ModelAttribute("form") TopicUpdateForm form, BindingResult result,
+    		Model model, @RequestParam(name="image", required = false) MultipartFile image, RedirectAttributes redirAttrs, Locale locale)
+            throws IOException {
+        if (result.hasErrors()) {
+            model.addAttribute("hasMessage", true);
+            model.addAttribute("class", "alert-danger");
+            model.addAttribute("message", messageSource.getMessage("topics.create.flash.1", new String[] {}, locale));
+            return "topics/edit";
+        }
+
+        boolean isImageLocal = false;
+        if (imageLocal != null) {
+            isImageLocal = new Boolean(imageLocal);
+        }
+
+        Topic entity =repository.findById(form.getId()).get();
+        Authentication authentication = (Authentication) principal;
+        UserInf user = (UserInf) authentication.getPrincipal();
+        entity.setUserId(user.getUserId());
+        
+        if (!image.isEmpty()) {
+        	File destFile = null;
+        	if (isImageLocal) {
+        		destFile = saveImageLocal(image, entity);
+        		entity.setPath(destFile.getAbsolutePath());
+        	} else {
+        		entity.setPath("");
+        	}
+        }
+        if (entity.isKeep()) {	
+        	entity.setKeep(false);
+        }
+        entity.setDescription(form.getDescription());
+        entity.setTitle(form.getTitle());
+        repository.saveAndFlush(entity);
+
+        redirAttrs.addFlashAttribute("hasMessage", true);
+        redirAttrs.addFlashAttribute("class", "alert-info");
+        redirAttrs.addFlashAttribute("message", messageSource.getMessage("topics.create.flash.2", new String[] {}, locale));
+
+        return "redirect:/topics/top";
+    }
+
     
     private File saveImageLocal(MultipartFile image, Topic entity) throws IOException {
         File uploadDir = new File("/uploads");
@@ -340,6 +385,9 @@ public class TopicsController {
         		entity.setPath("");
         	}
         }
+        if (entity.isKeep()) {	
+        	entity.setKeep(false);
+        }
         entity.setDescription(form.getDescription());
         entity.setTitle(form.getTitle());
         repository.saveAndFlush(entity);
@@ -359,12 +407,11 @@ public class TopicsController {
         return "redirect:/topics/top";
     }
     
-    @RequestMapping(value = "/topics/topic.csv", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE
+    @RequestMapping(value = "/topics/topic.csv/{id}", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE
             + "; charset=UTF-8; Content-Disposition: attachment")
     @ResponseBody
     public Object downloadCsv(@PathVariable("id") long id) throws IOException {
     	Optional<Topic> topics = repository.findById(id);
-        //Optional<Topic> topics = repository.findById(id);
         Type listType = new TypeToken<List<TopicCsv>>() {
         }.getType();
         

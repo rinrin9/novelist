@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import lombok.Data;
 
-@JsonPropertyOrder({ "ID", "ユーザーID", "パス", "説明", "緯度", "経度" })
+@JsonPropertyOrder({ "ID", "ユーザーID", "タイトル", "本文"})
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Data
 public class TopicCsv {
@@ -17,15 +17,10 @@ public class TopicCsv {
     @JsonProperty("ユーザーID")
     private Long userId;
 
-    @JsonProperty("パス")
-    private String path;
+    @JsonProperty("タイトル")
+    private String title;
 
-    @JsonProperty("説明")
+    @JsonProperty("本文")
     private String description;
 
-    @JsonProperty("緯度")
-    private Double latitude;
-
-    @JsonProperty("経度")
-    private Double longitude;
 }

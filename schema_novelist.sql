@@ -20,8 +20,6 @@ CREATE TABLE IF NOT EXISTS topic (
   path VARCHAR(255) NOT NULL,
   title VARCHAR(50) NOT NULL,
   description VARCHAR(1000) NOT NULL,
-  latitude VARCHAR(20),
-  longitude VARCHAR(20),
   created_at TIMESTAMP NOT NULL,
   updated_at TIMESTAMP NOT NULL,
   keep bool NOT NULL,

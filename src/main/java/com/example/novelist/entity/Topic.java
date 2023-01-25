@@ -40,12 +40,6 @@ public class Topic extends AbstractEntity implements Serializable {
     @Column(nullable = false, length = 50)
     private String title;
     
-    @Column
-    private Double latitude;
-
-    @Column
-    private Double longitude;
-    
     private boolean keep = false;
 
     @ManyToOne

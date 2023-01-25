@@ -29,7 +29,7 @@
             <textarea class="form-control" th:field="*{description}" rows="10" th:errorclass="error-field"></textarea><p th:if="${#fields.hasErrors('description')}" class="error-message" th:errors="*{description}"></p>
           </div>
           <input type="submit" class="btn w-100 btn-outline-dark" th:value="#{topics.new.submit}"/>
-          <button type="submit" class="btn w-100 btn-outline-dark" th:formaction="@{/topic/keep}">ボタン名</button>
+          <button type="submit" class="btn w-100 btn-outline-dark" th:formaction="@{/topic/keep}">保存</button>
         </form>
       </div>
     </div>
