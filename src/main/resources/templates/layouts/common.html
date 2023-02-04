@@ -20,8 +20,17 @@
 			<div class="collapse navbar-collapse" id="navbarNav">
 				<ul class="navbar-nav ms-auto">
 					<th:block sec:authorize="isAuthenticated()">
-					　　　　<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" 
-						    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"></button>
+						<li class="nav-item dropdown">
+                            <button class="btn dropdown-toggle nav-link" data-bs-toggle="dropdown" aria-expanded="false">
+                             検索
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><form class="k" action="/search" method="get">
+                                <input type="text" name="title">
+                                <input type="submit" value="検索">
+                            </form></li>
+                            </ul>
+                        </li>
 						<li class="nav-item">
 						    <a class="nav-link" th:href="@{/topics/top}">マイホーム</a>
 						</li>

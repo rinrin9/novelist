@@ -442,14 +442,18 @@ public class TopicsController {
     }
     
     @GetMapping("/search")
-    public String search(@RequestParam String title, Model model) throws IOException {
+    public String search(@RequestParam String title, Principal principal, Model model) throws IOException {
 
+    	Authentication authentication = (Authentication) principal;
+        UserInf user = (UserInf) authentication.getPrincipal();
+    	
         Iterable<Topic> topics = repository.findByTitleLike("%" + title + "%");
         List<TopicForm> list = new ArrayList<>();
         for (Topic entity : topics) {
-            TopicForm form = getTopics(entity);
+            TopicForm form = getTopic(user, entity);
             list.add(form);
         }
+        
         model.addAttribute("list", list);
         model.addAttribute("listsize", list.size());
     	

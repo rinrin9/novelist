@@ -98,8 +98,7 @@ nav.navbar {
 .users-new-wrapper {
   width: 100vw;
   height: 100vh;
-  background-image: url('/novelist/images/book-top.jpg');
-  background-image: url('/images/book-top.jpg');
+  background-image: url('../images/book-top.jpg');
   margin-bottom: 48px;
   background-position: center center;
   background-repeat: no-repeat;
@@ -212,8 +211,16 @@ nav.navbar {
   border-radius: 4px;
   float: right;
 }
+
 .release {
   float: right;
+}
+
+.image {
+  margin: 2px 0;
+  width: 150px;
+  height: 150px;
+  object-fit: contain;
 }
 table {
   width: 100%;
@@ -225,6 +232,7 @@ table th {
   width: 20%;
   text-align: left;
 }
+
 .btn-outline-light {
   border-color: #939393;
   border: 3px solid #939393;
@@ -279,4 +287,11 @@ footer p {
 }
 .description {
   overflow-wrap: break-word;
+}
+.k {
+  margin-right: 5px;
+  margin-left: 5px;
+}
+.dropdown-menu.show {
+  background: #b9b9b9;
 }
