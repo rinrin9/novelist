@@ -13,6 +13,6 @@ public class CommentForm {
     private Long topicId;
 
     @NotEmpty
-    @Size(max = 1000)
+    @Size(max = 25000)
     private String description;
 }

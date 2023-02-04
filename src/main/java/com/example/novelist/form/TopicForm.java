@@ -32,7 +32,7 @@ public class TopicForm {
     private String title;
 
     @NotEmpty
-    @Size(max = 1000)
+    @Size(max = 25000)
     private String description;
     
     private boolean keep = false;

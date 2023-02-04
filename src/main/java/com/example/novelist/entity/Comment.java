@@ -26,6 +26,6 @@ public class Comment extends AbstractEntity implements Serializable {
     @Column(nullable = false)
     private Long topicId;
 
-    @Column(nullable = false, length = 1000)
+    @Column(nullable = false, length = 25000)
     private String description;
 }

@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS topic (
   user_id INT NOT NULL,
   path VARCHAR(255) NOT NULL,
   title VARCHAR(50) NOT NULL,
-  description VARCHAR(1000) NOT NULL,
+  description VARCHAR(25000) NOT NULL,
   created_at TIMESTAMP NOT NULL,
   updated_at TIMESTAMP NOT NULL,
   keep bool NOT NULL,
@@ -43,7 +43,7 @@ ALTER TABLE favorite ADD CONSTRAINT FK_favorite_topic FOREIGN KEY (topic_id) REF
 CREATE TABLE IF NOT EXISTS comment (
   id SERIAL NOT NULL,
   topic_id INT NOT NULL,
-  description VARCHAR(1000) NOT NULL,
+  description VARCHAR(25000) NOT NULL,
   created_at TIMESTAMP NOT NULL,
   updated_at TIMESTAMP NOT NULL,
   PRIMARY KEY (id)

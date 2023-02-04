@@ -34,7 +34,7 @@ public class Topic extends AbstractEntity implements Serializable {
     @Column(nullable = false)
     private String path;
 
-    @Column(nullable = false, length = 1000)
+    @Column(nullable = false, length = 25000)
     private String description;
     
     @Column(nullable = false, length = 50)
