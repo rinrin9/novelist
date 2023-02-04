@@ -15,6 +15,8 @@ public interface TopicRepository extends JpaRepository<Topic, Long> {
 
     Iterable<Topic> findAllByOrderByUpdatedAtDesc();
     
+    Iterable<Topic> findTop3ByOrderByUpdatedAtDesc();
+    
     Optional<Topic> findById(Long id);
     
     public List<Topic> findByUserIdOrderByUpdatedAtDesc(Long userid);

@@ -9,32 +9,52 @@
 	<div class="topics-index-wrapper" layout:fragment="contents">
 		<div class="container">
 			<div class="row">
-				<h1 class="col-md-5 mx-auto" th:text="#{topic.home.list}"></h1>
+				<h1 class="haki col-md-3 mx-auto" th:text="#{topic.home.list}"></h1>
 			</div>
 			<div class="row" th:each="topic : ${list}">
-				<div class="col-md-6 mx-auto">
-					<main>
-						<a class="titles" th:text="#{topics.title}"></a> 
-						<a class="titles"
-							th:text="${topic.title}"
-							th:href="@{'/topics/{id}'(id=${topic.id})}"></a>
-						<div class="edit">
-							<a th:text="#{topics.new.edit}"
-								th:href="@{'/topics/edit/{id}'(id=${topic.id})}"></a>
-							<a th:text="#{topics.new.delete}"
-								th:href="@{'/topics/delete/{id}'(id=${topic.id})}"></a>
-						</div>
-						<div class=release>
-						    <th:block th:if="${topic.keep == true}">
-						        非公開 
-						    </th:block>
-						</div>
-						<div class=private>
-						    <th:block th:if="${topic.keep == false}">
-						        公開中 
-						    </th:block>
-						</div>
-					</main>
+				<div class="col-md-9 mx-auto">
+					<div id=posts>
+						<main>
+							<table class="box" border="1">
+								<tr>
+									<td width="250" rowspan="2">
+							            <img src="" th:if="${@environment.getProperty('image.local')}" th:src="${topic.imageData}" class="image" />
+                                        <img src="" th:unless="${@environment.getProperty('image.local')}" th:src="${topic.path}" class="image" />
+							        </td>
+									<td width="100">
+									    <h4 class="titles" th:text="#{topics.title}"></h4>
+							        </td>
+							        <td width="900">
+									    <a class="titles" th:text="${topic.title}"
+										   th:href="@{'/topics/{id}'(id=${topic.id})}"></a>
+								    </td>
+								</tr>
+								<tr>
+								    <td>
+										<div>
+										    <a class="edit" th:text="#{topics.new.edit}"
+											   th:href="@{'/topics/edit/{id}'(id=${topic.id})}"></a> 
+											<a class="delete" th:text="#{topics.new.delete}"
+											   th:href="@{'/topics/delete/{id}'(id=${topic.id})}"></a>
+										</div>
+										
+									</td>
+									<td class="release">
+									    <div class=release>
+											<th:block th:if="${topic.keep == true}">
+						                              非公開 
+						                    </th:block>
+										</div>
+										<div class=private>
+											<th:block th:if="${topic.keep == false}">
+						                              公開中 
+						                    </th:block>
+										</div>
+									</td>
+								</tr>
+							</table>
+						</main>
+					</div>
 				</div>
 			</div>
 		</div>

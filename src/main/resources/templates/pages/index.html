@@ -1,32 +1,72 @@
 <!DOCTYPE html>
-<html
-  xmlns:th="http://www.thymeleaf.org"
-  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-  layout:decorate="~{layouts/layout}">
-  <head>
-    <title>Novelist</title>
-  </head>
-  <body>
-<div class="pages-index-wrapper text-center" layout:fragment="contents">
-  <div class="container">
-    <div class="row p-form-top d-none d-lg-block d-xl-block d-xxl-block"></div>
-    <h1 class="text-white" th:text="#{pages.index.lead.1}">Make you Happy</h1>
-    <h2 class="text-white" th:text="#{pages.index.lead.2}">Novelist is a service that you can post photos.</h2>
-    <div class="d-none d-lg-block d-xl-block d-xxl-block">
-    <div class="row justify-content-center">
-      <div class="col-3">
-        <a class="btn w-100 btn-outline-light" href="/users/new" th:text="#{pages.index.signup}">Sign up</a>
-      </div>
-      <div class="col-3">
-        <a class="btn w-100 btn-outline-light" href="/login" th:text="#{pages.index.login}">Log in</a>
-      </div>
-    </div>
-    </div>
-    <div class="d-block d-lg-none d-xl-none d-xxl-none">
-      <a class="btn w-100 btn-outline-light mb-3" href="/users/new" th:text="#{pages.index.signup}">Sign up</a>
-      <a class="btn w-100 btn-outline-light" href="/login" th:text="#{pages.index.login}">Log in</a>
-    </div>
-  </div>
-</div>
-  </body>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout}">
+<head>
+<title>Novelist</title>
+</head>
+<body>
+	<div class="pages-index-wrapper text-center" layout:fragment="contents">
+		<div class="container">
+			<div class="haikei">
+				<a>
+				    <img th:src="@{/images/book-top.jpg}"  class="images-top">
+			    </a>
+				<div class="row p-form-top d-none d-lg-block d-xl-block d-xxl-block"></div>
+				<h1 class="text-white"></h1>
+				<h2 class="text-white"></h2>
+			</div>
+			<div class="d-none d-lg-block d-xl-block d-xxl-block">
+				<div class="row justify-content-center">
+					<div class="col-3">
+						<a class="btn w-100 btn-outline-light" href="/users/new"
+							th:text="#{pages.index.signup}">Sign up</a>
+					</div>
+					<div class="col-3">
+						<a class="btn w-100 btn-outline-light" href="/login"
+							th:text="#{pages.index.login}">Log in</a>
+					</div>
+				</div>
+			</div>
+			<div class="d-block d-lg-none d-xl-none d-xxl-none">
+				<a class="btn w-100 btn-outline-light mb-3" href="/users/new"
+					th:text="#{pages.index.signup}">Sign up</a> <a
+					class="btn w-100 btn-outline-light" href="/login"
+					th:text="#{pages.index.login}">Log in</a>
+			</div>
+			<div>
+				<h3 class="haku">最近の投稿</h3>
+				<div class="row" th:each="topic : ${list}" th:unless="${topic.keep}">
+					<div class="col-md-9  mx-auto">
+						<main>
+							<table class="box">
+								<tr>
+									<td width="50" rowspan="2"><img src=""
+										th:if="${@environment.getProperty('image.local')}"
+										th:src="${topic.imageData}" class="image" /> 
+									<img src=""
+										th:unless="${@environment.getProperty('image.local')}"
+										th:src="${topic.path}" class="image" /></td>
+									<td width="200">
+										<h4 class="author">ユーザー名:</h4>
+									</td>
+									<td width="300">
+										<h4 class="author" th:text="${topic.user.name}"></h4>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<h3 class="author">タイトル:</h3>
+									</td>
+									<td><a class="author" th:text="${topic.title}"
+										th:href="@{'/topics/{id}'(id=${topic.id})}"></a></td>
+								</tr>
+							</table>
+						</main>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
 </html>

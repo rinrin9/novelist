@@ -1,25 +1,35 @@
 <!DOCTYPE html>
-<html
-  xmlns:th="http://www.thymeleaf.org"
-  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-  layout:decorate="~{layouts/layout}">
-  <head>
-    <title>Novelist</title>
-  </head>
-  <body>
-<div class="topics-new-wrapper" layout:fragment="contents">
-  <div class="container">
-    <div class="row p-form-top d-none d-lg-block d-xl-block d-xxl-block"></div>
-    <div class="row">
-      <main class="col-md-6 mx-auto"> 
-        <h1 class="author" th:text="${topic.user.name}"></h1>
-        <h2 class="text-center" th:text="${topic.title}">title</h2>
-        <img src="" th:if="${@environment.getProperty('image.local')}" th:src="${topic.imageData}" class="image" />
-        <img src="" th:unless="${@environment.getProperty('image.local')}" th:src="${topic.path}" class="image" />
-        <pre class="description" th:text="${topic.description}"></pre>
-      </main>
-    </div>
-  </div>
-</div>
-  </body>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout}">
+<head>
+<title>Novelist</title>
+</head>
+<body>
+	<div class="topics-new-wrapper" layout:fragment="contents">
+		<div class="container">
+			<div class="row p-form-top d-none d-lg-block d-xl-block d-xxl-block"></div>
+			<div class="row">
+				<main class="col-md-6 mx-auto">
+					<h1 class="author" th:text="${topic.user.name}"></h1>
+					<h2 class="text-center" th:text="${topic.title}">title</h2>
+					<img src="" th:if="${@environment.getProperty('image.local')}"
+						th:src="${topic.imageData}" class="image" /> 
+					<img src="" th:unless="${@environment.getProperty('image.local')}"
+						th:src="${topic.path}" class="image" />
+					<h3 class="author">本文</h3>
+					<pre class="description" th:text="${topic.description}"></pre>
+					<div class="comments">
+						<h3 class='text-center' th:text="#{topics.index.comment}">コメント</h3>
+						<ul th:each="comment : ${topic.comments}">
+							<li><pre class="description"
+									th:text="${comment.description}"></pre></li>
+						</ul>
+
+					</div>
+				</main>
+			</div>
+		</div>
+	</div>
+</body>
 </html>
