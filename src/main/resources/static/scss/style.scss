@@ -88,8 +88,8 @@ nav.navbar {
     }
     .image {
       margin: 2px 0;
-      width: 130px;  
-      height: 100px;
+      width: 150px;  
+      height: 150px;
       object-fit: contain;
     }
   }
@@ -98,11 +98,12 @@ nav.navbar {
 .users-new-wrapper {
   width: 100vw;
   height: 100vh;
+  background-image: url('/novelist/images/book-top.jpg');
   background-image: url('/images/book-top.jpg');
   margin-bottom: 48px;
   background-position: center center;
   background-repeat: no-repeat;
-  background-attachment: fixed;
+  background-attachment: local;
   background-size: cover;
   main {
     padding-top: 80px;
@@ -111,7 +112,7 @@ nav.navbar {
 .topics-new-wrapper, .comments-new-wrapper {
   padding-top: 80px;
   #description {
-    height: 400px;
+    height: 500px;
   }
 }
 .topics-index-wrapper {
@@ -129,8 +130,8 @@ nav.navbar {
     }
     .image {
       margin: 2px 0;
-      width: 130px;
-      height: 100px;
+      width: 150px;
+      height: 150px;
       object-fit: contain;
     }
     .icons {
@@ -211,16 +212,8 @@ nav.navbar {
   border-radius: 4px;
   float: right;
 }
-
 .release {
   float: right;
-}
-
-.image {
-  margin: 2px 0;
-  width: 130px;
-  height: 100px;
-  object-fit: contain;
 }
 table {
   width: 100%;
@@ -232,7 +225,6 @@ table th {
   width: 20%;
   text-align: left;
 }
-
 .btn-outline-light {
   border-color: #939393;
   border: 3px solid #939393;
@@ -259,11 +251,17 @@ footer p {
     border: solid 3px #747474;
     border-radius: 10px;
 }
+.box-show {
+  font-weight: bold;
+  color: #747474;
+  background: #FFF;
+  border-radius: 10px;
+}
 .haku {
   margin-top: 20px;
   text-align:center;
 }
-.haki {
+.center {
   text-align:center;
 }
 .images-top {

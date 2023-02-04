@@ -21,4 +21,5 @@ public interface TopicRepository extends JpaRepository<Topic, Long> {
     
     public List<Topic> findByUserIdOrderByUpdatedAtDesc(Long userid);
 
+    Iterable<Topic> findByTitleLike(String title);
 }

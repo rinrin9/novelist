@@ -11,14 +11,33 @@
 			<div class="row p-form-top d-none d-lg-block d-xl-block d-xxl-block"></div>
 			<div class="row">
 				<main class="col-md-10 mx-auto">
-					<h1 class="author" th:text="${topic.user.name}"></h1>
-					<h2 class="text-center" th:text="${topic.title}">title</h2>
-					<img src="" th:if="${@environment.getProperty('image.local')}"
-						th:src="${topic.imageData}" class="image" /> 
-					<img src="" th:unless="${@environment.getProperty('image.local')}"
-						th:src="${topic.path}" class="image" />
+					<table class="box-show">
+						<tr>
+							<td width="150" rowspan="2"><img src=""
+								th:if="${@environment.getProperty('image.local')}"
+								th:src="${topic.imageData}" class="image" /> <img src=""
+								th:unless="${@environment.getProperty('image.local')}"
+								th:src="${topic.path}" class="image" /></td>
+							<td width="300">
+								<h4 class="author">ユーザー名:</h4>
+							</td>
+							<td width="900">
+								<h4 class="author" th:text="${topic.user.name}"></h4>
+							</td>
+						</tr>
+						<tr>
+
+							<td>
+								<h3 class="author">タイトル:</h3>
+							</td>
+							<td><a class="author" th:text="${topic.title}"
+								th:href="@{'/topics/{id}'(id=${topic.id})}"></a></td>
+						</tr>
+
+					</table>
 					<h3 class="author">本文</h3>
-					<textarea class="form-control" th:field="${topic.description}" rows="10" th:errorclass="error-field"></textarea>
+					<textarea class="form-control" th:field="${topic.description}"
+						rows="10" th:errorclass="error-field"></textarea>
 					<div class="comments">
 						<h3 class='text-center' th:text="#{topics.index.comment}">コメント</h3>
 						<ul th:each="comment : ${topic.comments}">

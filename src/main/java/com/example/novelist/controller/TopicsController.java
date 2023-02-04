@@ -147,6 +147,40 @@ public class TopicsController {
         return form;
     }
 
+    public TopicForm getTopics(Topic entity) throws FileNotFoundException, IOException {
+        modelMapper.getConfiguration().setAmbiguityIgnored(true);
+        modelMapper.typeMap(Topic.class, TopicForm.class).addMappings(mapper -> mapper.skip(TopicForm::setUser));
+        
+        boolean isImageLocal = false;
+        if (imageLocal != null) {
+            isImageLocal = new Boolean(imageLocal);
+        }
+        TopicForm form = modelMapper.map(entity, TopicForm.class);
+
+        if (isImageLocal) {
+            try (InputStream is = new FileInputStream(new File(entity.getPath()));
+                    ByteArrayOutputStream os = new ByteArrayOutputStream()) {
+                byte[] indata = new byte[10240 * 16];
+                int size;
+                while ((size = is.read(indata, 0, indata.length)) > 0) {
+                    os.write(indata, 0, size);
+                }
+                StringBuilder data = new StringBuilder();
+                data.append("data:");
+                data.append(getMimeType(entity.getPath()));
+                data.append(";base64,");
+
+                data.append(new String(Base64Utils.encode(os.toByteArray()), "ASCII"));
+                form.setImageData(data.toString());
+            }
+        }
+
+        UserForm userForm = modelMapper.map(entity.getUser(), UserForm.class);
+        form.setUser(userForm);
+        
+        return form;
+    }
+    
     private String getMimeType(String path) {
         String extension = FilenameUtils.getExtension(path);
         String mimeType = "image/";
@@ -406,6 +440,23 @@ public class TopicsController {
         
         return "redirect:/topics/top";
     }
+    
+    @GetMapping("/search")
+    public String search(@RequestParam String title, Model model) throws IOException {
+
+        Iterable<Topic> topics = repository.findByTitleLike("%" + title + "%");
+        List<TopicForm> list = new ArrayList<>();
+        for (Topic entity : topics) {
+            TopicForm form = getTopics(entity);
+            list.add(form);
+        }
+        model.addAttribute("list", list);
+        model.addAttribute("listsize", list.size());
+    	
+        return "topics/index";
+    }
+    
+    
     
     @RequestMapping(value = "/topics/topic.csv/{id}", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE
             + "; charset=UTF-8; Content-Disposition: attachment")

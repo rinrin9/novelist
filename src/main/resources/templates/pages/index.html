@@ -9,9 +9,8 @@
 	<div class="pages-index-wrapper text-center" layout:fragment="contents">
 		<div class="container">
 			<div class="haikei">
-				<a>
-				    <img th:src="@{/images/book-top.jpg}"  class="images-top">
-			    </a>
+				<a> <img th:src="@{/images/book-top.jpg}" class="images-top">
+				</a>
 				<div class="row p-form-top d-none d-lg-block d-xl-block d-xxl-block"></div>
 				<h1 class="text-white"></h1>
 				<h2 class="text-white"></h2>
@@ -37,17 +36,16 @@
 			<div>
 				<h3 class="haku">最近の投稿</h3>
 				<div class="row" th:each="topic : ${list}" th:unless="${topic.keep}">
-					<div class="col-md-9  mx-auto">
+					<div class="col-md-7  mx-auto">
 						<main>
 							<table class="box">
 								<tr>
-									<td width="50" rowspan="2"><img src=""
+									<td width="100" rowspan="2"><img src=""
 										th:if="${@environment.getProperty('image.local')}"
-										th:src="${topic.imageData}" class="image" /> 
-									<img src=""
+										th:src="${topic.imageData}" class="image" /> <img src=""
 										th:unless="${@environment.getProperty('image.local')}"
 										th:src="${topic.path}" class="image" /></td>
-									<td width="200">
+									<td width="100">
 										<h4 class="author">ユーザー名:</h4>
 									</td>
 									<td width="300">
@@ -62,6 +60,10 @@
 										th:href="@{'/topics/{id}'(id=${topic.id})}"></a></td>
 								</tr>
 							</table>
+							<form action="/search" method="get">
+								名前： <input type="text" name="title"> <input
+									type="submit" value="送信">
+							</form>
 						</main>
 					</div>
 				</div>

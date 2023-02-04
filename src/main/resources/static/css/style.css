@@ -77,18 +77,19 @@ nav.navbar {
       padding: 0 20px; }
     .pages-index-wrapper main .image {
       margin: 2px 0;
-      width: 130px;
-      height: 100px;
+      width: 150px;
+      height: 150px;
       object-fit: contain; }
 
 .users-new-wrapper {
   width: 100vw;
   height: 100vh;
+  background-image: url("/novelist/images/book-top.jpg");
   background-image: url("/images/book-top.jpg");
   margin-bottom: 48px;
   background-position: center center;
   background-repeat: no-repeat;
-  background-attachment: fixed;
+  background-attachment: local;
   background-size: cover; }
   .users-new-wrapper main {
     padding-top: 80px; }
@@ -96,7 +97,7 @@ nav.navbar {
 .topics-new-wrapper, .comments-new-wrapper {
   padding-top: 80px; }
   .topics-new-wrapper #description, .comments-new-wrapper #description {
-    height: 400px; }
+    height: 500px; }
 
 .topics-index-wrapper {
   padding: 80px 0 20px;
@@ -111,8 +112,8 @@ nav.navbar {
       padding: 0 20px; }
     .topics-index-wrapper main .image {
       margin: 2px 0;
-      width: 130px;
-      height: 100px;
+      width: 150px;
+      height: 150px;
       object-fit: contain; }
     .topics-index-wrapper main .icons {
       display: flex;
@@ -182,12 +183,6 @@ nav.navbar {
 .release {
   float: right; }
 
-.image {
-  margin: 2px 0;
-  width: 130px;
-  height: 100px;
-  object-fit: contain; }
-
 table {
   width: 100%; }
 
@@ -224,11 +219,17 @@ footer p {
   border: solid 3px #747474;
   border-radius: 10px; }
 
+.box-show {
+  font-weight: bold;
+  color: #747474;
+  background: #FFF;
+  border-radius: 10px; }
+
 .haku {
   margin-top: 20px;
   text-align: center; }
 
-.haki {
+.center {
   text-align: center; }
 
 .images-top {
