@@ -85,7 +85,6 @@ nav.navbar {
   width: 100vw;
   height: 100vh;
   background-image: url("../images/book-top.jpg");
-  margin-bottom: 48px;
   background-position: center center;
   background-repeat: no-repeat;
   background-attachment: local;
@@ -179,6 +178,22 @@ nav.navbar {
   border-radius: 4px;
   float: right; }
 
+.chara {
+  border: 3px solid #f51a0a;
+  background-color: #f51a0a;
+  margin-right: 0;
+  margin-bottom: 8px;
+  text-decoration: none;
+  color: #ffffff;
+  font-size: 16px;
+  font-family: 'Bitter', serif;
+  width: 72px;
+  display: block;
+  text-align: center;
+  line-height: 24px;
+  border-radius: 4px;
+  float: right; }
+
 .release {
   float: right; }
 
@@ -189,7 +204,8 @@ nav.navbar {
   object-fit: contain; }
 
 table {
-  width: 100%; }
+  width: 100%;
+  border-collapse: separate; }
 
 table td {
   text-align: left; }
@@ -259,5 +275,21 @@ footer p {
 
 .dropdown-menu.show {
   background: #b9b9b9; }
+
+.wrap {
+  display: grid;
+  grid-template-columns: 1fr 3fr; }
+
+.main_content {
+  background: #e0efff; }
+
+.side {
+  background: #e0ffe0;
+  padding-right: 15px; }
+
+.side_content {
+  position: sticky;
+  top: 50px;
+  background: #ffe0ff; }
 
 /*# sourceMappingURL=style.css.map */

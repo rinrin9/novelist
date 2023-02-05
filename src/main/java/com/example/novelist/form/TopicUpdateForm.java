@@ -33,6 +33,51 @@ public class TopicUpdateForm {
     @NotEmpty
     @Size(max = 25000)
     private String description;
+    
+    @Size(max = 50)
+    private String name;
+
+    @Size(max = 50)
+    private String nickname;
+    
+    @Size(max = 50)
+    private String role;
+    
+    @Size(max = 50)
+    private String gendere;
+    
+    @Size(max = 50)
+    private String age;
+    
+    @Size(max = 50)
+    private String birthday;
+    
+    @Size(max = 50)
+    private String height;
+    
+    @Size(max = 50)
+    private String weight;
+     
+    @Size(max = 50)
+    private String personality;
+    
+    @Size(max = 100)
+    private String skill;
+    
+    @Size(max = 100)
+    private String ability;
+    
+    @Size(max = 100)
+    private String Appearance;
+    
+    @Size(max = 100)
+    private String upbringing;
+    
+    @Size(max = 100)
+    private String background;
+    
+    @Size(max = 200)
+    private String others;
 
     private UserForm user;
     

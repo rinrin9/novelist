@@ -8,31 +8,28 @@
 <body>
 	<div class="pages-index-wrapper text-center" layout:fragment="contents">
 		<div class="container">
-			<div class="haikei">
-				<a> <img th:src="@{/images/book-top.jpg}" class="images-top">
-				</a>
-				<div class="row p-form-top d-none d-lg-block d-xl-block d-xxl-block"></div>
-				<h1 class="text-white"></h1>
-				<h2 class="text-white"></h2>
-			</div>
-			<div class="d-none d-lg-block d-xl-block d-xxl-block">
-				<div class="row justify-content-center">
-					<div class="col-3">
-						<a class="btn w-100 btn-outline-light" href="/users/new"
-							th:text="#{pages.index.signup}">Sign up</a>
-					</div>
-					<div class="col-3">
-						<a class="btn w-100 btn-outline-light" href="/login"
-							th:text="#{pages.index.login}">Log in</a>
+		    <a> <img th:src="@{/images/book-top.jpg}" class="images-top"></a>
+			<div class="row p-form-top d-none d-lg-block d-xl-block d-xxl-block"></div>
+			<th:block sec:authorize="!isAuthenticated()">
+				<div class="d-none d-lg-block d-xl-block d-xxl-block">
+					<div class="row justify-content-center">
+						<div class="col-3">
+							<a class="btn w-100 btn-outline-light" href="/users/new"
+								th:text="#{pages.index.signup}">Sign up</a>
+						</div>
+						<div class="col-3">
+							<a class="btn w-100 btn-outline-light" href="/login"
+								th:text="#{pages.index.login}">Log in</a>
+						</div>
 					</div>
 				</div>
-			</div>
-			<div class="d-block d-lg-none d-xl-none d-xxl-none">
-				<a class="btn w-100 btn-outline-light mb-3" href="/users/new"
-					th:text="#{pages.index.signup}">Sign up</a> <a
-					class="btn w-100 btn-outline-light" href="/login"
-					th:text="#{pages.index.login}">Log in</a>
-			</div>
+				<div class="d-block d-lg-none d-xl-none d-xxl-none">
+					<a class="btn w-100 btn-outline-light mb-3" href="/users/new"
+						th:text="#{pages.index.signup}">Sign up</a> 
+					<a class="btn w-100 btn-outline-light" href="/login"
+						th:text="#{pages.index.login}">Log in</a>
+				</div>
+			</th:block>
 			<div>
 				<h3 class="haku">最近の投稿</h3>
 				<div class="row" th:each="topic : ${list}" th:unless="${topic.keep}">

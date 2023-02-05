@@ -41,6 +41,51 @@ public class Topic extends AbstractEntity implements Serializable {
     private String title;
     
     private boolean keep = false;
+    
+    @Column
+    private String name;
+
+    @Column
+    private String nickname;
+    
+    @Column
+    private String role;
+    
+    @Column
+    private String gendere;
+    
+    @Column
+    private String age;
+    
+    @Column
+    private String birthday;
+    
+    @Column
+    private String height;
+    
+    @Column
+    private String weight;
+     
+    @Column
+    private String personality;
+    
+    @Column
+    private String skill;
+    
+    @Column
+    private String ability;
+    
+    @Column
+    private String Appearance;
+    
+    @Column
+    private String upbringing;
+    
+    @Column
+    private String background;
+    
+    @Column
+    private String others;
 
     @ManyToOne
     @JoinColumn(name = "userId", insertable = false, updatable = false)

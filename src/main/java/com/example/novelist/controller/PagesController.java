@@ -43,7 +43,7 @@ public class PagesController {
     private String imageLocal;
 
     @RequestMapping("/")
-    public String index(Model model) throws IOException {
+    public String index(Model model, Principal principal) throws IOException {
 
         Iterable<Topic> topics = repository.findTop3ByOrderByUpdatedAtDesc();
         List<TopicForm> list = new ArrayList<>();

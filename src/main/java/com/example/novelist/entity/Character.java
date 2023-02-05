@@ -77,5 +77,9 @@ public class Character extends AbstractEntity implements Serializable {
     @JoinColumn(name = "userId", insertable = false, updatable = false)
     private User user;
     
+    @ManyToOne
+    @JoinColumn(name = "topicId", insertable = false, updatable = false)
+    private Topic topic;
+    
     
 }

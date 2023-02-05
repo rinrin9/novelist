@@ -39,8 +39,11 @@
 										</div>
 										
 									</td>
-									<td class="release">
-									    <div class=release>
+									<td>
+									    <div>
+									        <a class="chara" th:href="@{'/character/{id}'(id=${topic.id})}">登場人物の詳細</a> 
+									    </div>
+									    <div class="release">
 											<th:block th:if="${topic.keep == true}">
 						                              非公開 
 						                    </th:block>
