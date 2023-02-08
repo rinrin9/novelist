@@ -2,6 +2,7 @@ DROP TABLE IF EXISTS comment CASCADE;
 DROP TABLE IF EXISTS favorite CASCADE;
 DROP TABLE IF EXISTS topic CASCADE;
 DROP TABLE IF EXISTS users CASCADE;
+DROP TABLE IF EXISTS chara CASCADE;
 
 CREATE TABLE IF NOT EXISTS users (
   user_id SERIAL NOT NULL,
@@ -20,21 +21,6 @@ CREATE TABLE IF NOT EXISTS topic (
   path VARCHAR(255) NOT NULL,
   title VARCHAR(50) NOT NULL,
   description VARCHAR(25000) NOT NULL,
-  name VARCHAR(50),
-  nickname VARCHAR(50),
-  role VARCHAR(50),
-  gendere VARCHAR(50),
-  age VARCHAR(50),
-  birthday VARCHAR(50),
-  height VARCHAR(50),
-  weight VARCHAR(50),
-  personality VARCHAR(50),
-  skill VARCHAR(100),
-  ability VARCHAR(100),
-  Appearance VARCHAR(100),
-  upbringing VARCHAR(100),
-  background VARCHAR(100),
-  others VARCHAR(200),
   created_at TIMESTAMP NOT NULL,
   updated_at TIMESTAMP NOT NULL,
   keep bool NOT NULL,
@@ -62,9 +48,34 @@ CREATE TABLE IF NOT EXISTS comment (
   created_at TIMESTAMP NOT NULL,
   updated_at TIMESTAMP NOT NULL,
   PRIMARY KEY (id)
-);
+);  
 
 ALTER TABLE comment ADD CONSTRAINT FK_comment_topic FOREIGN KEY (topic_id) REFERENCES topic;
+
+CREATE TABLE IF NOT EXISTS chara (
+  id SERIAL NOT NULL,
+  topic_id INT NOT NULL,
+  name VARCHAR(50),
+  nickname VARCHAR(50),
+  role VARCHAR(50),
+  gendere VARCHAR(50),
+  age VARCHAR(50),
+  birthday VARCHAR(50),
+  height VARCHAR(50),
+  weight VARCHAR(50),
+  personality VARCHAR(50),
+  skill VARCHAR(100),
+  ability VARCHAR(100),
+  Appearance VARCHAR(100),
+  upbringing VARCHAR(100),
+  background VARCHAR(100),
+  others VARCHAR(200),
+  created_at TIMESTAMP NOT NULL,
+  updated_at TIMESTAMP NOT NULL,
+  PRIMARY KEY (id)
+);  
+
+ALTER TABLE chara ADD CONSTRAINT FK_chara_topic FOREIGN KEY (topic_id) REFERENCES topic;
 
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO novelist;
 GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO novelist;

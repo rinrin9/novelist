@@ -27,8 +27,16 @@
             <label class="form-label text-black" for="topic_description" th:text="#{topics.new.writing}">Writing</label>
             <textarea class="form-control" th:field="*{description}" rows="10" th:errorclass="error-field"></textarea><p th:if="${#fields.hasErrors('description')}" class="error-message" th:errors="*{description}"></p>
           </div>
-          <input type="submit" class="btn w-100 btn-outline-dark" th:value="#{topics.new.submit}"/>
-          <button type="submit" class="btn w-100 btn-outline-dark" th:formaction="@{/topic/keepupdate}">保存</button>
+          <div class= "hyouji">
+              <th:block th:if="${form.keep == true}">
+                  <input type="submit" class="btn w-100 btn-outline-dark" value="公開">
+                  <button type="submit" class="btn w-100 btn-outline-dark" th:formaction="@{/topics/keepupdate}">保存</button>
+              </th:block>
+              <th:block th:if="${form.keep == false}">
+                  <input type="submit" class="btn w-100 btn-outline-dark" value="修正"/>
+                  <button type="submit" class="btn w-100 btn-outline-dark" th:formaction="@{/topics/keepupdate}">非表示</button>
+              </th:block>
+          </div>
         </form>
       </div>
     </div>

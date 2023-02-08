@@ -236,64 +236,7 @@ public class TopicsController {
         
         return "topics/new";
     }
-    
-    @GetMapping("/character/{id}")
-    public String search(Model model, @PathVariable("id") long id, Principal principal) throws FileNotFoundException, IOException {
-    	Authentication authentication = (Authentication) principal;
-        UserInf user = (UserInf) authentication.getPrincipal();
-    	
-    	Optional<Topic> topic = repository.findById(id);
-        TopicForm form = getTopic(user, topic.get());
-    	 model.addAttribute("form", form);
-    	
-        return "topics/characters";
-    }
-    
-    @RequestMapping(value = "/chara-content")
-    public String createdetails(Principal principal, @Validated @ModelAttribute("form") TopicUpdateForm form, BindingResult result,
-    		Model model, @RequestParam(name="image", required = false) MultipartFile image, RedirectAttributes redirAttrs, Locale locale)
-            throws IOException {
-        if (result.hasErrors()) {
-            model.addAttribute("hasMessage", true);
-            model.addAttribute("class", "alert-danger");
-            model.addAttribute("message", messageSource.getMessage("topics.create.flash.3", new String[] {}, locale));
-            return "topics/edit";
-        }
-
-        boolean isImageLocal = false;
-        if (imageLocal != null) {
-            isImageLocal = new Boolean(imageLocal);
-        }
-
-        Topic entity =repository.findById(form.getId()).get();
-        Authentication authentication = (Authentication) principal;
-        UserInf user = (UserInf) authentication.getPrincipal();
-        
-        entity.setUserId(user.getUserId());
-        entity.setName(form.getName());
-        entity.setNickname(form.getNickname());
-        entity.setGendere(form.getGendere());
-        entity.setAge(form.getAge());
-        entity.setBirthday(form.getBirthday());
-        entity.setHeight(form.getHeight());
-        entity.setWeight(form.getWeight());
-        entity.setPersonality(form.getPersonality());
-        entity.setSkill(form.getSkill());
-        entity.setAbility(form.getAbility());
-        entity.setAppearance(form.getAppearance());
-        entity.setUpbringing(form.getUpbringing());
-        entity.setBackground(form.getBackground());
-        entity.setOthers(form.getOthers());
-        
-        repository.saveAndFlush(entity);
-
-        redirAttrs.addFlashAttribute("hasMessage", true);
-        redirAttrs.addFlashAttribute("class", "alert-info");
-        redirAttrs.addFlashAttribute("message", messageSource.getMessage("topics.create.flash.4", new String[] {}, locale));
-
-        return "redirect:/topics/top";
-    }
-
+   
     @RequestMapping(value = "/topic", method = RequestMethod.POST)
     public String create(Principal principal, @Validated @ModelAttribute("form") TopicForm form, BindingResult result,
     		Model model, @RequestParam MultipartFile image, RedirectAttributes redirAttrs, Locale locale)
@@ -403,6 +346,9 @@ public class TopicsController {
         }
         if (entity.isKeep()) {	
         	entity.setKeep(false);
+        }
+        if (!entity.isKeep()) {	
+        	entity.setKeep(true);
         }
         entity.setDescription(form.getDescription());
         entity.setTitle(form.getTitle());

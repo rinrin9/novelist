@@ -18,64 +18,63 @@ import javax.persistence.Table;
 import lombok.Data;
 
 @Entity
-@Table(name = "character")
+@Table(name = "chara")
 @Data
-public class Character extends AbstractEntity implements Serializable {
+public class Chara extends AbstractEntity implements Serializable {
     private static final long serialVersionUID = 1L;
     
     @Id
-    @SequenceGenerator(name = "character_id_seq")
+    @SequenceGenerator(name = "chara_id_seq")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    
     @Column(nullable = false)
+    private Long topicId;
+
+    @Column(length = 50)
     private String name;
 
-    @Column
+    @Column(length = 50)
     private String nickname;
     
-    @Column
+    @Column(length = 50)
     private String role;
     
-    @Column
+    @Column(length = 50)
     private String gendere;
     
-    @Column
+    @Column(length = 50)
     private String age;
     
-    @Column
+    @Column(length = 50)
     private String birthday;
     
-    @Column
+    @Column(length = 50)
     private String height;
     
-    @Column
+    @Column(length = 50)
     private String weight;
      
-    @Column
+    @Column(length = 50)
     private String personality;
     
-    @Column
+    @Column(length = 100)
     private String skill;
     
-    @Column
+    @Column(length = 100)
     private String ability;
     
-    @Column
+    @Column(length = 100)
     private String Appearance;
     
-    @Column
+    @Column(length = 100)
     private String upbringing;
     
-    @Column
+    @Column(length = 100)
     private String background;
     
-    @Column
+    @Column(length = 200)
     private String others;
-    
-    @ManyToOne
-    @JoinColumn(name = "userId", insertable = false, updatable = false)
-    private User user;
     
     @ManyToOne
     @JoinColumn(name = "topicId", insertable = false, updatable = false)
