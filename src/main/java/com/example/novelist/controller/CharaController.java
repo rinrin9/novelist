@@ -49,9 +49,24 @@ public class CharaController {
 		model.addAttribute("charaform", charaform);
 		model.addAttribute("topicid", id);
     	
-        return "topics/chara";
+        return "charas/chara";
     }
  
+    @GetMapping(value = "/characreated/{id}")
+    public String characreated(Model model, @PathVariable("id") long id) throws IOException {
+         
+    	Optional<Chara> chara = chararepository.findByTopicIdAndRole(id, "ヒロイン");
+    	CharaForm charaform = new CharaForm();
+    	if (chara.isPresent()) {
+    	    charaform = modelMapper.map(chara.get(), CharaForm.class);
+    	}
+		model.addAttribute("charaform", charaform);
+		model.addAttribute("topicid", id);
+    	
+        return "charas/character";
+    }
+
+    
     @RequestMapping(value = "/chara-content/{id}")
     public String createdetails(@Validated @ModelAttribute("charaform") CharaForm charaform, BindingResult result, @PathVariable("id") Long id, 
     		@PathVariable("id") Topic topic, Model model, RedirectAttributes redirAttrs, Locale locale)

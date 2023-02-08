@@ -11,10 +11,20 @@
 			<div class="wrap">
 				<div class="side">
 					<div class="side_content">
-						<h2>キャラクター</h2>
-						<p>主人公</p>
-						<p>ヒロイン</p>
+					<h2>キャラクター</h2>
+					    <form method="get" th:action="@{'/chara/{id}'(id=${topicid})}" th:object="${charaform}"> 
+						<input type="hidden" th:field="*{id}" />
+						<div class="row">
+							<input type="submit" name="role" th:value="主人公" />
+						</div>
+						</form>
+					    <form method="get" th:action="@{'/characreated/{id}'(id=${topicid})}" th:object="${charaform}"> 
+						<input type="hidden" th:field="*{id}" />
+						<div class="row">
+							<input type="submit" name="role" th:value="ヒロイン" />
+						</div>
 						<p>追加</p>
+						</form>
 					</div>
 				</div>
 				<form method="post" th:action="@{'/chara-content/{id}'(id=${topicid})}" th:object="${charaform}"> 
@@ -22,7 +32,7 @@
 						<div class="main_content">
 						<input type="hidden" th:field="*{id}" />
 						    <div class="row">
-								<label class="form-label" for="chara_role">主人公</label> <input type="hidden" name="role" th:value="主人公" />
+								<label class="form-label" for="chara_role">ヒロイン</label><input type="hidden" name="role" th:value="ヒロイン" />
 							</div>
 						    <div class="row">
 								<label class="form-label" for="chara_name">名前</label> <input type="text" th:field="*{name}" />

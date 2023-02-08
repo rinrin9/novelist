@@ -411,7 +411,6 @@ public class TopicsController {
         Topic entity =repository.findById(form.getId()).get();
         Authentication authentication = (Authentication) principal;
         UserInf user = (UserInf) authentication.getPrincipal();
-        entity.setUserId(user.getUserId());
         
         if (!image.isEmpty()) {
         	File destFile = null;
