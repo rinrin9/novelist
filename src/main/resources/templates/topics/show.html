@@ -36,7 +36,7 @@
 
 					</table>
 					<h3 class="author">本文</h3>
-					<textarea class="form-control" th:field="${topic.description}"
+					<textarea readonly class="form-control" th:field="${topic.description}"
 						rows="10" th:errorclass="error-field"></textarea>
 					<div class="comments">
 						<h3 class='text-center' th:text="#{topics.index.comment}">コメント</h3>

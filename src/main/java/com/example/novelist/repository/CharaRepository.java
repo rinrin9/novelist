@@ -11,4 +11,6 @@ public interface CharaRepository extends JpaRepository<Chara, Long> {
 	
 	Optional<Chara> findByTopicIdAndRole(Long id, String role);
 	
+	Iterable<Chara> findAllByTopicId(Long id);
+	
 }

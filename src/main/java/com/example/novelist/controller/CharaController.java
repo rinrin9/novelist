@@ -1,6 +1,9 @@
 package com.example.novelist.controller;
 
 import java.io.IOException;
+import java.net.URI;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 
@@ -17,6 +20,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import com.example.novelist.entity.Chara;
 import com.example.novelist.entity.Topic;
@@ -41,35 +45,45 @@ public class CharaController {
     @GetMapping("/chara/{id}")
     public String search(Model model, @PathVariable("id") long id) throws IOException {
     	
-    	Optional<Chara> chara = chararepository.findByTopicIdAndRole(id, "主人公");
     	CharaForm charaform = new CharaForm();
-    	if (chara.isPresent()) {
-    	    charaform = modelMapper.map(chara.get(), CharaForm.class);
-    	}
+    	Iterable<Chara> charas = chararepository.findAllByTopicId(id);
+    	List<CharaForm> list = new ArrayList<>();
+        for (Chara entity : charas) {
+        	CharaForm charasform = modelMapper.map(entity, CharaForm.class);
+            list.add(charasform);
+        }
+        model.addAttribute("list", list);
+    	
 		model.addAttribute("charaform", charaform);
 		model.addAttribute("topicid", id);
     	
         return "charas/chara";
     }
  
-    @GetMapping(value = "/characreated/{id}")
-    public String characreated(Model model, @PathVariable("id") long id) throws IOException {
+    @GetMapping(value = "/charapick/{charaid}")
+    public String charapick(Model model, @PathVariable("charaid") long charaid) throws IOException {
          
-    	Optional<Chara> chara = chararepository.findByTopicIdAndRole(id, "ヒロイン");
+    	Optional<Chara> chara = chararepository.findById(charaid);
     	CharaForm charaform = new CharaForm();
-    	if (chara.isPresent()) {
-    	    charaform = modelMapper.map(chara.get(), CharaForm.class);
-    	}
+    	charaform = modelMapper.map(chara.get(), CharaForm.class);
 		model.addAttribute("charaform", charaform);
-		model.addAttribute("topicid", id);
-    	
-        return "charas/character";
-    }
+    
+		Iterable<Chara> charas = chararepository.findAllByTopicId(charaform.getTopic().getId());
+    	List<CharaForm> list = new ArrayList<>();
+        for (Chara entity : charas) {
+        	CharaForm charasform = modelMapper.map(entity, CharaForm.class);
+            list.add(charasform);
+        }
+        model.addAttribute("list", list);
 
+		model.addAttribute("topicid", charaform.getTopic().getId());
+		
+        return "charas/chara";
+    }
     
     @RequestMapping(value = "/chara-content/{id}")
     public String createdetails(@Validated @ModelAttribute("charaform") CharaForm charaform, BindingResult result, @PathVariable("id") Long id, 
-    		@PathVariable("id") Topic topic, Model model, RedirectAttributes redirAttrs, Locale locale)
+    		@PathVariable("id") Topic topic, Model model, RedirectAttributes redirAttrs, Locale locale, UriComponentsBuilder builder)
             throws IOException {
         if (result.hasErrors()) {
             model.addAttribute("hasMessage", true);
@@ -101,12 +115,14 @@ public class CharaController {
         entity.setOthers(charaform.getOthers());
         
         chararepository.saveAndFlush(entity);
+        
+        URI location = builder.path("/charapick/" + entity.getId()).build().toUri();
 
         redirAttrs.addFlashAttribute("hasMessage", true);
         redirAttrs.addFlashAttribute("class", "alert-info");
         redirAttrs.addFlashAttribute("message", messageSource.getMessage("topics.create.flash.4", new String[] {}, locale));
 
-        return "redirect:/chara/{id}";
+        return "redirect:" + location.toString();
     }
 
 }

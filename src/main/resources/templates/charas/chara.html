@@ -11,20 +11,18 @@
 			<div class="wrap">
 				<div class="side">
 					<div class="side_content">
-					<h2>キャラクター</h2>
-					    <form method="get" th:action="@{'/chara/{id}'(id=${topicid})}" th:object="${charaform}"> 
-						<input type="hidden" th:field="*{id}" />
-						<div class="row">
-							<input type="submit" name="role" th:value="主人公" />
+						<h2>キャラクター</h2>
+						<div class="row" th:each="chara : ${list}">
+							<ul>
+								<li><input type="button" th:value="${chara.name}"
+									th:attr="onClick='location.href=\''+@{'/charapick/{id}'(id=${chara.id})}+'\''">
+								</li>
+							</ul>
 						</div>
-						</form>
-					    <form method="get" th:action="@{'/characreated/{id}'(id=${topicid})}" th:object="${charaform}"> 
-						<input type="hidden" th:field="*{id}" />
-						<div class="row">
-							<input type="submit" name="role" th:value="ヒロイン" />
-						</div>
-						<p>追加</p>
-						</form>
+						<p>
+							<input type="button" value="+新しく登場人物を作る"
+								th:attr="onClick='location.href=\''+@{'/chara/{id}'(id=${topicid})}+'\''">
+						</p>
 					</div>
 				</div>
 				<form method="post" th:action="@{'/chara-content/{id}'(id=${topicid})}" th:object="${charaform}"> 
@@ -32,10 +30,10 @@
 						<div class="main_content">
 						<input type="hidden" th:field="*{id}" />
 						    <div class="row">
-								<label class="form-label" for="chara_role">主人公</label> <input type="hidden" name="role" th:value="主人公" />
+						        <label class="form-label" for="chara_name">名前</label> <input type="text" th:field="*{name}" />
 							</div>
 						    <div class="row">
-								<label class="form-label" for="chara_name">名前</label> <input type="text" th:field="*{name}" />
+								<label class="form-label" for="chara_role">役職</label> <input  type="text" th:field="*{role}" />
 							</div>
 							<div class="row">
 								<label class="form-label" for="chara_nickname">あだ名</label> <input type="text" th:field="*{nickname}" />
