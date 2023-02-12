@@ -46,7 +46,7 @@ public class CharaController {
     public String search(Model model, @PathVariable("id") long id) throws IOException {
     	
     	CharaForm charaform = new CharaForm();
-    	Iterable<Chara> charas = chararepository.findAllByTopicId(id);
+    	Iterable<Chara> charas = chararepository.findAllOrderByTopicId(id);
     	List<CharaForm> list = new ArrayList<>();
         for (Chara entity : charas) {
         	CharaForm charasform = modelMapper.map(entity, CharaForm.class);
@@ -68,7 +68,7 @@ public class CharaController {
     	charaform = modelMapper.map(chara.get(), CharaForm.class);
 		model.addAttribute("charaform", charaform);
     
-		Iterable<Chara> charas = chararepository.findAllByTopicId(charaform.getTopic().getId());
+		Iterable<Chara> charas = chararepository.findAllOrderByTopicId(charaform.getTopic().getId());
     	List<CharaForm> list = new ArrayList<>();
         for (Chara entity : charas) {
         	CharaForm charasform = modelMapper.map(entity, CharaForm.class);
@@ -125,4 +125,13 @@ public class CharaController {
         return "redirect:" + location.toString();
     }
 
+    @RequestMapping(value = "/charadelete/{charaid}")
+    public String delete(@PathVariable("charaid") long charaid, Model model, UriComponentsBuilder builder) throws IOException {
+
+    	Optional<Chara> chara = chararepository.findById(charaid);
+    	URI location = builder.path("/chara/" + chara.get().getTopicId()).build().toUri();
+    	chararepository.deleteById(charaid);
+    	
+        return "redirect:" + location.toString();
+    }
 }

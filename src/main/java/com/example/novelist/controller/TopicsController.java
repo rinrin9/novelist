@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.security.Principal;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
@@ -76,7 +76,7 @@ public class TopicsController {
     @Value("${image.local:false}")
     private String imageLocal;
 
-    @GetMapping(path = "/topics")
+	@GetMapping(path = "/topics")
     public String index(Principal principal, Model model) throws IOException {
         Authentication authentication = (Authentication) principal;
         UserInf user = (UserInf) authentication.getPrincipal();
@@ -409,8 +409,6 @@ public class TopicsController {
         }
 
         Topic entity =repository.findById(form.getId()).get();
-        Authentication authentication = (Authentication) principal;
-        UserInf user = (UserInf) authentication.getPrincipal();
         
         if (!image.isEmpty()) {
         	File destFile = null;

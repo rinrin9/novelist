@@ -15,18 +15,22 @@
 				<div class="col-md-9 mx-auto">
 					<div id=posts>
 						<main>
-							<table class="box" border="1">
+						<th:block th:if="${topic.keep == true}">
+							<table class="box-true" border="1">
 								<tr>
-									<td width="250" rowspan="2">
+									<td width="180" rowspan="2">
 							            <img src="" th:if="${@environment.getProperty('image.local')}" th:src="${topic.imageData}" class="image" />
                                         <img src="" th:unless="${@environment.getProperty('image.local')}" th:src="${topic.path}" class="image" />
 							        </td>
 									<td width="100">
 									    <h4 class="titles" th:text="#{topics.title}"></h4>
 							        </td>
-							        <td width="900">
+							        <td width="330">
 									    <a class="titles" th:text="${topic.title}"
 										   th:href="@{'/topics/{id}'(id=${topic.id})}"></a>
+								    </td>
+								    <td>
+								        <div class="release">非公開</div>
 								    </td>
 								</tr>
 								<tr>
@@ -39,23 +43,52 @@
 										</div>
 										
 									</td>
+									<td></td>
 									<td>
-									    <div>
-									        <a class="chara" th:href="@{'/chara/{id}'(id=${topic.id})}">登場人物の詳細</a> 
-									    </div>
-									    <div class="release">
-											<th:block th:if="${topic.keep == true}">
-						                              非公開 
-						                    </th:block>
-										</div>
-										<div class=private>
-											<th:block th:if="${topic.keep == false}">
-						                              公開中 
-						                    </th:block>
+										<div>
+											<a class="chara" th:href="@{'/chara/{id}'(id=${topic.id})}">登場人物の詳細</a>
 										</div>
 									</td>
 								</tr>
 							</table>
+							</th:block>
+							<th:block th:if="${topic.keep == false}">
+							<table class="box-false" border="1">
+								<tr>
+									<td width="180" rowspan="2">
+							            <img src="" th:if="${@environment.getProperty('image.local')}" th:src="${topic.imageData}" class="image" />
+                                        <img src="" th:unless="${@environment.getProperty('image.local')}" th:src="${topic.path}" class="image" />
+							        </td>
+									<td width="100">
+									    <h4 class="titles" th:text="#{topics.title}"></h4>
+							        </td>
+							        <td width="330">
+									    <a class="titles" th:text="${topic.title}"
+										   th:href="@{'/topics/{id}'(id=${topic.id})}"></a>
+								    </td>
+								    <td>
+										<div class=private>公開中</div>
+								    </td>
+								</tr>
+								<tr>
+								    <td>
+										<div>
+										    <a class="edit" th:text="#{topics.new.edit}"
+											   th:href="@{'/topics/edit/{id}'(id=${topic.id})}"></a> 
+											<a class="delete" th:text="#{topics.new.delete}"
+											   th:href="@{'/topics/delete/{id}'(id=${topic.id})}"></a>
+										</div>
+										
+									</td>
+									<td></td>
+									<td>
+										<div>
+											<a class="chara" th:href="@{'/chara/{id}'(id=${topic.id})}">登場人物の詳細</a>
+										</div>
+									</td>
+								</tr>
+							</table>
+							</th:block>
 						</main>
 					</div>
 				</div>

@@ -73,8 +73,7 @@ nav.navbar {
     border: 1px solid #e6ecf0;
     border-radius: 6px; }
     .pages-index-wrapper main .author {
-      margin-top: 10px;
-      padding: 0 20px; }
+      margin-top: 10px; }
     .pages-index-wrapper main .image {
       margin: 2px 0;
       width: 150px;
@@ -194,8 +193,29 @@ nav.navbar {
   border-radius: 4px;
   float: right; }
 
-.release {
+.release, .private {
   float: right; }
+
+.box {
+  font-weight: bold;
+  color: #747474;
+  background: #FFF;
+  border: solid 3px #747474;
+  border-radius: 10px; }
+
+.box-true {
+  font-weight: bold;
+  color: #747474;
+  background: #4a4a4a47;
+  border: solid 3px #747474;
+  border-radius: 10px; }
+
+.box-false {
+  font-weight: bold;
+  color: #ff0000;
+  background: #FFF;
+  border: solid 3px #747474;
+  border-radius: 10px; }
 
 .image {
   margin: 2px 0;
@@ -232,13 +252,6 @@ table th {
 footer p {
   text-align: center;
   margin-top: 20px; }
-
-.box {
-  font-weight: bold;
-  color: #747474;
-  background: #FFF;
-  border: solid 3px #747474;
-  border-radius: 10px; }
 
 .box-show {
   font-weight: bold;
@@ -291,5 +304,35 @@ footer p {
   position: sticky;
   top: 50px;
   background: #ffe0ff; }
+
+.charadelete {
+  border: 8px solid #f51a0a;
+  background-color: #f51a0a;
+  margin-right: 0;
+  margin-top: 8px;
+  text-decoration: none;
+  color: #ffffff;
+  font-size: 16px;
+  font-family: 'Bitter', serif;
+  display: block;
+  text-align: center;
+  line-height: 24px;
+  border-radius: 4px;
+  float: right; }
+
+.charakeep {
+  border: 3px solid #00ff1f;
+  background-color: #00ff1f;
+  margin-right: 0;
+  margin-top: 8px;
+  text-decoration: none;
+  color: #ffffff;
+  font-size: 16px;
+  font-family: 'Bitter', serif;
+  display: block;
+  text-align: center;
+  line-height: 24px;
+  border-radius: 4px;
+  float: right; }
 
 /*# sourceMappingURL=style.css.map */

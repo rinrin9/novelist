@@ -54,4 +54,10 @@ public class Topic extends AbstractEntity implements Serializable {
     @JoinColumn(name = "topicId", insertable = false, updatable = false)
     private List<Comment> comments;
     
+    @OneToMany(cascade = CascadeType.REMOVE)
+    @JoinColumn(name = "topicId", insertable = false, updatable = false)
+    private List<Chara> chara;
+    
+    
+    
 }

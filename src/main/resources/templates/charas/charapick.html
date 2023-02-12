@@ -73,6 +73,10 @@
 								<label class="form-label" for="chara_others">その他</label> <textarea rows="3" th:field="*{others}"></textarea>
 							</div>
 							<input type="submit" class="btn w-100 btn-outline-dark" value="保存"/>
+							<a class="delete" th:text="#{topics.new.delete}"
+											   th:href="@{'/charadelete/{charaid}'(charaid=*{id})}"></a>
+							<input type="button" value="削除" 
+						            th:attr="onClick='location.href=\''+@{'/charadelete/{charaid}'(charaid=*{id})}+'\''">
 						</div>
 					</div>
 				</form>
