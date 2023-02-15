@@ -45,6 +45,7 @@ public class PagesController {
     @RequestMapping("/")
     public String index(Model model, Principal principal) throws IOException {
 
+    	//最新の投稿３件を取得
         Iterable<Topic> topics = repository.findTop3ByOrderByUpdatedAtDesc();
         List<TopicForm> list = new ArrayList<>();
         for (Topic entity : topics) {

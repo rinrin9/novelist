@@ -370,3 +370,9 @@ footer p {
   border-radius: 4px;
   float: right;
 }
+.new {
+    display: none;
+}
+.new.is-show {
+    display: inline-block;
+}

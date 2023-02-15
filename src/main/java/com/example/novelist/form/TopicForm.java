@@ -1,5 +1,6 @@
 package com.example.novelist.form;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.validation.constraints.NotEmpty;
@@ -44,5 +45,7 @@ public class TopicForm {
     private FavoriteForm favorite;
     
     private List<CommentForm> comments;
+    
+    private Date updatedAt;
 
 }

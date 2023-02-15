@@ -51,6 +51,19 @@
     	  $(".alert").fadeOut(5000);
       });
     </script>
+    <script>
+    var periodDay = 7; // アイコンを表示する日数
+    
+    var current = new Date();
+    var postdate = document.querySelectorAll('[data-postdate]');
+    for (var i = 0; i < postdate.length; i++) {
+      var d = new Date(postdate[i].dataset.postdate);
+      d.setDate(d.getDate() + periodDay);
+      if(current < d) {
+        postdate[i].classList.add('is-show');
+      }
+    }
+    </script>
 	<footer layout:replace="~{layouts/common :: footer}"></footer>
 </body>
 </html>
