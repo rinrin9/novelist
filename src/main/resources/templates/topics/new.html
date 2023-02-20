@@ -10,7 +10,7 @@
 <div class="topics-new-wrapper" layout:fragment="contents">
   <div class="container">
     <div class="row">
-      <div class="col-md-9 mx-auto">
+      <div class="col-md-10 mx-auto">
         <h1 class="text-center" th:text="#{topics.new.title}">Post</h1>
         <form class="new_topic" id="new_topic" method="post" th:action="@{/topic}" th:object="${form}" enctype="multipart/form-data">
           <div layout:replace="~{layouts/common::messages}"></div>

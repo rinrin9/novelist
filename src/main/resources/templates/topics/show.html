@@ -28,16 +28,14 @@
 						<tr>
 
 							<td>
-								<h3 class="author">タイトル:</h3>
+								<h4 class="author">タイトル:</h4>
 							</td>
-							<td><a class="author" th:text="${topic.title}"
-								th:href="@{'/topics/{id}'(id=${topic.id})}"></a></td>
+							<td><h4 class="author" th:text="${topic.title}"></h4></td>
 						</tr>
 
 					</table>
 					<h3 class="author">本文</h3>
-					<textarea readonly class="form-control" th:field="${topic.description}"
-						rows="10" th:errorclass="error-field"></textarea>
+					<pre class="form-description form-control" th:text="${topic.description}"></pre>
 					<div class="comments">
 						<h3 class='text-center' th:text="#{topics.index.comment}">コメント</h3>
 						<ul th:each="comment : ${topic.comments}">

@@ -15,19 +15,19 @@
 			<th:block th:if="${listsize != 0}">
 				<h1 class="col-md-2 mx-auto">作品一覧</h1>
 				<div class="row" th:each="topic : ${list}" th:unless="${topic.keep}">
-					<div class="col-md-9 mx-auto">
+					<div class="col-md-8 mx-auto">
 						<main>
 							<table border="1" class="box">
 								<tr>
-									<td width="150" rowspan="2"><img src=""
+									<td width="100" rowspan="2"><img src=""
 										th:if="${@environment.getProperty('image.local')}"
 										th:src="${topic.imageData}" class="image" /> <img src=""
 										th:unless="${@environment.getProperty('image.local')}"
 										th:src="${topic.path}" class="image" /></td>
-									<td width="300">
+									<td width="200">
 										<h4 class="author">ユーザー名:</h4>
 									</td>
-									<td width="900">
+									<td width="500">
 										<h4 class="author" th:text="${topic.user.name}"></h4>
 									</td>
 									<td>

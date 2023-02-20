@@ -7,6 +7,9 @@ h1, h2, h3, h4, h5, h6 {
 .p-form-top {
   height: 20px; }
 
+.p-form-50 {
+  height: 50px; }
+
 .p-form-topic {
   height: 380px; }
 
@@ -73,7 +76,10 @@ nav.navbar {
     border: 1px solid #e6ecf0;
     border-radius: 6px; }
     .pages-index-wrapper main .author {
-      margin-top: 10px; }
+      margin-top: 10px;
+      width: 200px; }
+    .pages-index-wrapper main .authorname {
+      width: 500px; }
     .pages-index-wrapper main .image {
       margin: 2px 0;
       width: 150px;
@@ -279,6 +285,11 @@ footer p {
 .form-control {
   border: 1px solid #767676; }
 
+.form-description {
+  border: none;
+  white-space: pre-wrap;
+  height: 100%; }
+
 .description {
   overflow-wrap: break-word; }
 
@@ -291,19 +302,21 @@ footer p {
 
 .wrap {
   display: grid;
-  grid-template-columns: 1fr 3fr; }
+  grid-template-columns: 1fr 4fr; }
 
 .main_content {
-  background: #e0efff; }
+  background: #e0efff;
+  padding-left: 15px; }
 
 .side {
-  background: #e0ffe0;
-  padding-right: 15px; }
+  background: #bbbbbb;
+  border-radius: 10px; }
 
 .side_content {
   position: sticky;
   top: 50px;
-  background: #ffe0ff; }
+  background: #bbbbbb;
+  border-radius: 10px; }
 
 .charadelete {
   border: 8px solid #f51a0a;
@@ -340,5 +353,9 @@ footer p {
 
 .new.is-show {
   display: inline-block; }
+
+ul {
+  list-style: none;
+  margin-left: 5px; }
 
 /*# sourceMappingURL=style.css.map */

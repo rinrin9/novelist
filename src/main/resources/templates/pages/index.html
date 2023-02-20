@@ -8,6 +8,7 @@
 <body>
 	<div class="pages-index-wrapper text-center" layout:fragment="contents">
 		<div class="container">
+		    <div class="p-form-50 d-block d-lg-none d-xl-none d-xxl-none"></div>
 		    <a> <img th:src="@{/images/book-top.jpg}" class="images-top"></a>
 			<div class="row p-form-top d-none d-lg-block d-xl-block d-xxl-block"></div>
 			<th:block sec:authorize="!isAuthenticated()">
@@ -46,14 +47,14 @@
 										<h4 class="author">ユーザー名:</h4>
 									</td>
 									<td width="300">
-										<h4 class="author" th:text="${topic.user.name}"></h4>
+										<h4 class="authorname" th:text="${topic.user.name}"></h4>
 									</td>
 								</tr>
 								<tr>
 									<td>
 										<h3 class="author">タイトル:</h3>
 									</td>
-									<td><a class="author" th:text="${topic.title}"
+									<td><a class="authorname" th:text="${topic.title}"
 										th:href="@{'/topics/{id}'(id=${topic.id})}"></a></td>
 								</tr>
 							</table>
