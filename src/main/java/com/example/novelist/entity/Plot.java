@@ -25,35 +25,23 @@ public class Plot extends AbstractEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @Column
-    private String title;
+    @Column(nullable = false)
+    private Long topicId;
+    
+    @Column(length = 300)
+    private String setting;
 
-    @Column
-    private String first;
+    @Column(length = 300)
+    private String confrontation;
 
-    @Column
-    private String second;
+    @Column(length = 300)
+    private String Resolution;
     
-    @Column
-    private String third;
-    
-    @Column
-    private String fourth;
-    
-    @Column
-    private String firstshow;
-
-    @Column
-    private String secondshow;
-    
-    @Column
-    private String thirdshow;
-    
-    @Column
-    private String fourthshow;
+    @Column(length = 300)
+    private String memo;
     
     @ManyToOne
-    @JoinColumn(name = "userId", insertable = false, updatable = false)
-    private User user;
+    @JoinColumn(name = "topicId", insertable = false, updatable = false)
+    private Topic topic;
     
 }

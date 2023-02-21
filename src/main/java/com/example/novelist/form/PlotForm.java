@@ -1,5 +1,9 @@
 package com.example.novelist.form;
 
+import javax.validation.constraints.Size;
+
+import com.example.novelist.entity.Topic;
+
 import lombok.Data;
 
 @Data
@@ -7,24 +11,20 @@ public class PlotForm {
 
 	private Long id;
 	
-	private String title;
+    private Long topicId;
 
-    private String first;
+	@Size(max = 300)
+    private String setting;
 
-    private String second;
+	@Size(max = 300)
+    private String confrontation;
 
-    private String third;
+	@Size(max = 300)
+    private String Resolution;
 
-    private String fourth;
+	@Size(max = 300)
+    private String memo;
     
-    private String firstshow;
-
-    private String secondshow;
-
-    private String thirdshow;
-
-    private String fourthshow;
-
-    private UserForm user;
+    private Topic topic;
 
 }

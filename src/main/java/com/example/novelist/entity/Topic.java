@@ -58,6 +58,8 @@ public class Topic extends AbstractEntity implements Serializable {
     @JoinColumn(name = "topicId", insertable = false, updatable = false)
     private List<Chara> chara;
     
-    
+    @OneToMany(cascade = CascadeType.REMOVE)
+    @JoinColumn(name = "topicId", insertable = false, updatable = false)
+    private List<Plot> plot;
     
 }

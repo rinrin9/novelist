@@ -77,5 +77,19 @@ CREATE TABLE IF NOT EXISTS chara (
 
 ALTER TABLE chara ADD CONSTRAINT FK_chara_topic FOREIGN KEY (topic_id) REFERENCES topic;
 
+CREATE TABLE IF NOT EXISTS plot (
+  id SERIAL NOT NULL,
+  topic_id INT NOT NULL,
+  setting VARCHAR(300),
+  confrontation VARCHAR(300),
+  Resolution VARCHAR(300),
+  memo VARCHAR(300),
+  created_at TIMESTAMP NOT NULL,
+  updated_at TIMESTAMP NOT NULL,
+  PRIMARY KEY (id)
+);  
+
+ALTER TABLE plot ADD CONSTRAINT FK_plot_topic FOREIGN KEY (topic_id) REFERENCES topic;
+
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO novelist;
 GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO novelist;

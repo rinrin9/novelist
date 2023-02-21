@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout}">
+<head>
+<title>Novelist</title>
+</head>
+<body>
+	<div class="topics-new-wrapper" layout:fragment="contents">
+		<div class="container">
+			<div class="wrap">
+				<div class="side">
+					<div class="side_content">
+						<h2 class="haku">三幕構成</h2>
+						<div class="row">
+							<ul>
+								<li><input type="button" value="設定"
+								    th:attr="onClick='location.href=\''+@{'/plotpick/setting/{id}'(id=${topicid})}+'\''">
+								</li>
+								<li><input type="button" value="対立"
+									th:attr="onClick='location.href=\''+@{'/plotpick/confrontation/{id}'(id=${topicid})}+'\''">
+								</li>
+								<li><input type="button" value="解決"
+									th:attr="onClick='location.href=\''+@{'/plotpick/Resolution/{id}'(id=${topicid})}+'\''">
+								</li>
+								<li><input type="button" value="メモ"
+									th:attr="onClick='location.href=\''+@{'/plotpick/memo/{id}'(id=${topicid})}+'\''">
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<form method="post" th:action="@{'/plot-content/{id}'(id=${topicid})}" th:object="${plotform}"> 
+					<div class="main">
+						<div class="main_content">
+						    <input type="hidden" th:field="*{id}" />
+						    <textarea class="plotcontent" th:field="*{setting}"></textarea>
+							<div class="row">
+								<input type="submit" class="btn col-md-6 btn-outline-dark charakeep"
+									value="保存" /> 
+								<a class="plotdelete col-md-6 btn-outline-dark"
+									th:text="#{topics.new.delete}"
+									th:href="@{'/plotdelete/{charaid}'(plotid=*{id})}"></a>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</body>
+</html>

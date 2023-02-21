@@ -9,7 +9,6 @@ import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,9 +37,6 @@ public class CharaController {
 
     @Autowired
     private CharaRepository chararepository;
-
-    @Value("${image.local:false}")
-    private String imageLocal;
     
     @GetMapping("/chara/{id}")
     public String search(Model model, @PathVariable("id") long id) throws IOException {
@@ -57,7 +53,7 @@ public class CharaController {
 		model.addAttribute("charaform", charaform);
 		model.addAttribute("topicid", id);
     	
-        return "charas/chara";
+        return "charas/index";
     }
  
     @GetMapping(value = "/charapick/{charaid}")
@@ -78,7 +74,7 @@ public class CharaController {
 
 		model.addAttribute("topicid", charaform.getTopic().getId());
 		
-        return "charas/chara";
+        return "charas/index";
     }
     
     @RequestMapping(value = "/chara-content/{id}")
