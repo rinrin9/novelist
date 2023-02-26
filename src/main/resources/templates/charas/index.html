@@ -14,13 +14,13 @@
 						<h2 class="haku">キャラクター</h2>
 						<div class="row" th:each="chara : ${list}">
 							<ul>
-								<li><input type="button" th:value="${chara.name}"
+								<li><input type="button" th:value="${chara.name}" class="images-top"
 									th:attr="onClick='location.href=\''+@{'/charapick/{id}'(id=${chara.id})}+'\''">
 								</li>
 							</ul>
 						</div>
 						<p>
-							<input type="button" value="+新しく登場人物を作る"
+							<input type="button" value="+新しく登場人物を作る" class="images-top"
 								th:attr="onClick='location.href=\''+@{'/chara/{id}'(id=${topicid})}+'\''">
 						</p>
 					</div>

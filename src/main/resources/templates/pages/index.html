@@ -9,7 +9,10 @@
 	<div class="pages-index-wrapper text-center" layout:fragment="contents">
 		<div class="container">
 		    <div class="p-form-50 d-block d-lg-none d-xl-none d-xxl-none"></div>
-		    <a> <img th:src="@{/images/book-top.jpg}" class="images-top"></a>
+		        <div class="top-container">
+		            <img th:src="@{/images/book-top.jpg}" class="images-top">
+		            <h4 class="tag">手軽に小説を作ろう</h4>
+		        </div>
 			<div class="row p-form-top d-none d-lg-block d-xl-block d-xxl-block"></div>
 			<th:block sec:authorize="!isAuthenticated()">
 				<div class="d-none d-lg-block d-xl-block d-xxl-block">

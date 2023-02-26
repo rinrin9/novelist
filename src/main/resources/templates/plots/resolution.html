@@ -14,16 +14,16 @@
 						<h2 class="haku">三幕構成</h2>
 						<div class="row">
 							<ul>
-								<li><input type="button" value="設定"
+								<li><input type="button" value="設定(第一幕)" class="images-top btn-outline-dark"
 								    th:attr="onClick='location.href=\''+@{'/plotpick/setting/{id}'(id=${topicid})}+'\''">
 								</li>
-								<li><input type="button" value="対立"
+								<li><input type="button" value="対立(第二幕)" class="images-top btn-outline-dark"
 									th:attr="onClick='location.href=\''+@{'/plotpick/confrontation/{id}'(id=${topicid})}+'\''">
 								</li>
-								<li><input type="button" value="解決"
+								<li><input type="button" value="解決(第三幕)" class="images-top btn-outline-light"
 									th:attr="onClick='location.href=\''+@{'/plotpick/Resolution/{id}'(id=${topicid})}+'\''">
 								</li>
-								<li><input type="button" value="メモ"
+								<li><input type="button" value="メモ" class="images-top btn-outline-dark"
 									th:attr="onClick='location.href=\''+@{'/plotpick/memo/{id}'(id=${topicid})}+'\''">
 								</li>
 							</ul>
@@ -37,11 +37,8 @@
 						    <h3>解決</h3>
 						    <textarea class="plotcontent" th:field="*{Resolution}"></textarea>
 							<div class="row">
-								<input type="submit" class="btn col-md-6 btn-outline-dark charakeep"
+								<input type="submit" class="btn col-md-12 btn-outline-dark charakeep"
 									value="保存" /> 
-								<a class="plotdelete col-md-6 btn-outline-dark"
-									th:text="#{topics.new.delete}"
-									th:href="@{'/plotdelete/{charaid}'(plotid=*{id})}"></a>
 							</div>
 						</div>
 					</div>
