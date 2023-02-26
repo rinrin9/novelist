@@ -1,9 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Sawarabi+Mincho');
 
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4, h5, h6, a  {
   font-weight: 500;
   color:  #6c757d;
- /* font-family: 'Sawarabi Mincho', sans-serif; */
+  font-family: 'Sawarabi Mincho', sans-serif;
 }
 .p-form-top {
     height: 20px;
@@ -130,6 +130,7 @@ nav.navbar {
     .author {
       margin-top: 10px;
       padding: 0 20px;
+      font-size: 25px;
     }
     .image {
       margin: 2px 0;
@@ -287,9 +288,12 @@ table th {
   border-radius: 4px;
   float: right;
 }
-footer p {
+footer {
+  background-image: url('/images/backg.jpg');
+  p {
   text-align:center;
-  margin-top: 20px;
+  padding: 30px;
+  }
 }
 .box-show {
   font-weight: bold;
@@ -383,9 +387,11 @@ footer p {
 }
 .new {
     display: none;
+    
 }
 .new.is-show {
     display: inline-block;
+    color: #fb0000;
 }
 ul {
   li{
@@ -405,10 +411,14 @@ ul {
 }
 .tag{
   position: absolute;
-  top:80%;
+  top:75%;
   left:50%;
   font-size:100px;
   color: white;
   padding:0;
   margin:0;
+}
+.text-center {
+  padding:10px;
+  margin-bottom:0;
 }
