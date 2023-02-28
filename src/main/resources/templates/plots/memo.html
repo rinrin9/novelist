@@ -32,12 +32,12 @@
 				</div>
 				<form method="post" th:action="@{'/plot-content/{id}'(id=${topicid})}" th:object="${plotform}"> 
 					<div class="main">
-						<div class="main_content">
+						<div class="main2_content">
 						    <input type="hidden" th:field="*{id}" />
 						    <h3>メモ</h3>
 						    <textarea class="plotcontent" th:field="*{memo}"></textarea>
-							<div class="row">
-								<input type="submit" class="btn col-md-12 btn-outline-dark charakeep"
+							<div class="ro">
+								<input type="submit" class="btn btn-outline-dark charakeep"
 									value="保存" /> 
 							</div>
 						</div>

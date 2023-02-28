@@ -22,11 +22,11 @@
 							            <img src="" th:if="${@environment.getProperty('image.local')}" th:src="${topic.imageData}" class="image" />
                                         <img src="" th:unless="${@environment.getProperty('image.local')}" th:src="${topic.path}" class="image" />
 							        </td>
-									<td width="100">
-									    <h4 class="titles" th:text="#{topics.title}"></h4>
+									<td width="200">
+									    <h4 class="author" th:text="#{topics.title}"></h4>
 							        </td>
 							        <td width="330">
-									    <a class="titles" th:text="${topic.title}"
+									    <a class="author" th:text="${topic.title}"
 										   th:href="@{'/topics/{id}'(id=${topic.id})}"></a>
 								    </td>
 								    <td>
@@ -60,11 +60,11 @@
 							            <img src="" th:if="${@environment.getProperty('image.local')}" th:src="${topic.imageData}" class="image" />
                                         <img src="" th:unless="${@environment.getProperty('image.local')}" th:src="${topic.path}" class="image" />
 							        </td>
-									<td width="100">
-									    <h4 class="titles" th:text="#{topics.title}"></h4>
+									<td width="200">
+									    <h4 class="author" th:text="#{topics.title}"></h4>
 							        </td>
 							        <td width="330">
-									    <a class="titles" th:text="${topic.title}"
+									    <a class="author" th:text="${topic.title}"
 										   th:href="@{'/topics/{id}'(id=${topic.id})}"></a>
 								    </td>
 								    <td>

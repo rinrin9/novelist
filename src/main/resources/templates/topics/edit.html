@@ -29,12 +29,12 @@
           </div>
           <div class= "hyouji">
               <th:block th:if="${form.keep == true}">
-                  <input type="submit" class="btn w-100 btn-outline-dark" value="公開">
-                  <button type="submit" class="btn w-100 btn-outline-dark" th:formaction="@{/topics/keepupdate}">保存</button>
+                  <input type="submit" class="btn btn-out btn btn-outline-dark" value="公開">
+                  <button type="submit" class="btn btn-keep btn btn-outline-dark" th:formaction="@{/topics/keepupdate}">保存</button>
               </th:block>
               <th:block th:if="${form.keep == false}">
-                  <input type="submit" class="btn w-100 btn-outline-dark" value="修正"/>
-                  <button type="submit" class="btn w-100 btn-outline-dark" th:formaction="@{/topics/keepupdate}">非表示</button>
+                  <input type="submit" class="btn btn-keep btn-outline-dark" value="保存"/>
+                  <button type="submit" class="btn btn-out btn-outline-dark" th:formaction="@{/topics/keepupdate}">非表示</button>
               </th:block>
           </div>
         </form>

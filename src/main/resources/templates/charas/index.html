@@ -14,13 +14,13 @@
 						<h2 class="haku">キャラクター</h2>
 						<div class="row" th:each="chara : ${list}">
 							<ul>
-								<li><input type="button" th:value="${chara.name}" class="images-top"
+								<li><input type="button" th:value="${chara.name}" class="btn-outline-dark images-top"
 									th:attr="onClick='location.href=\''+@{'/charapick/{id}'(id=${chara.id})}+'\''">
 								</li>
 							</ul>
 						</div>
 						<p>
-							<input type="button" value="+新しく登場人物を作る" class="images-top"
+							<input type="button" value="+新しく登場人物を作る" class="btn-outline-dark images-top"
 								th:attr="onClick='location.href=\''+@{'/chara/{id}'(id=${topicid})}+'\''">
 						</p>
 					</div>
@@ -74,13 +74,12 @@
 							<div class="row">
 								<label class="form-label" for="chara_others">その他</label> <textarea rows="3" th:field="*{others}"></textarea>
 							</div>
-							<div class="row">
-								<input type="submit" class="btn col-md-6 btn-outline-dark charakeep"
-									value="保存" /> 
-								<a class="charadelete col-md-6 btn-outline-dark"
-									th:text="#{topics.new.delete}"
-									th:href="@{'/charadelete/{charaid}'(charaid=*{id})}"></a>
-							</div>
+						</div>
+						<div class="r">
+							<input type="submit" class="btn btn-outline-dark charakeep"
+								value="保存" /> <a class="charadelete btn btn-outline-dark"
+								th:text="#{topics.new.delete}"
+								th:href="@{'/charadelete/{charaid}'(charaid=*{id})}"></a>
 						</div>
 					</div>
 				</form>

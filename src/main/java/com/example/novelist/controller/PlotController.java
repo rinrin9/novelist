@@ -38,11 +38,18 @@ public class PlotController {
 
     @GetMapping("/plot/{id}")
     public String search(Model model, @PathVariable("id") long id) throws IOException {
-    	
+    
     	PlotForm plotform = new PlotForm();
     	Optional<Plot> plot = plotrepository.findByTopicId(id);
     	if (!plot.isEmpty()) {
     		plotform = modelMapper.map(plot.get(), PlotForm.class);
+        }else {
+        	Plot entity = new Plot();
+        	entity.setTopicId(id);
+        	entity.setSetting("『例』\n物語の主題の提示\n・兄が妹を助ける話\n\n世界観の設定\n・人食い鬼が存在する世界でその鬼を退治する存在もいる。\n・鬼は首を切るか日の光を浴びないと死なない\n・舞台は日本の大正時代\n\n主人公の設定\n・大家族の長男で父親代わりの存在で弟や妹の面倒をみる\n\n物語の目標を明示\n・主人公の家族が鬼に殺され、妹が鬼にされてしまい、妹を人間に戻すために鬼を退治する組織に入る。\n\n主人公と関係性が高くなる人物との出会い\n・個性的な同期との出会い、以後行動を共にする事が多くなる");
+        	entity.setConfrontation("『例』\n様々な能力、人の力を使い目標に向かう\n・鬼の協力者を味方につけ、元凶の鬼の血が必要だと知る\n・その元凶の鬼が唯一人を鬼に変える力を持ち、首を切っても死なない事を知る\n\n目標に向かうが課題や困難が立ちはだかる\n・妹が鬼という事が組織に伝わり、組織の隊長役に妹が殺されそうになる\n・主人公は秘めた力を持っているがその力を引き出すのに手こずる\n・鬼と対峙するも仲間に多くの犠牲を出す\n\n最大の課題、難関に立ち向かう\n・元凶の鬼と対峙する");
+        	entity.setResolution("『例』\n最後の課題\n・元凶の鬼と戦うもまともに戦っても勝てないので時間を稼ぎ、日の光を浴びせて殺すことを試みる\n・多くの仲間を犠牲にするが何とか足止めし日の光によって消滅に成功\n\nどんでん返し、超展開\n・妹を人間に戻す薬の効果が効き、人間に戻ったのち最終決戦に加わる\n・絶望の中、主人公の力が解放され味方全体にバフがかかる\n・ラスボスを消滅出来たと思ったが、死の間際に主人公の体内に入り暴走を起こす\n・しかし、主人公は体内でラスボスと立ち向かい本当の消滅に成功");
+        	plotrepository.saveAndFlush(entity);
         }
         model.addAttribute("plotform", plotform);
         model.addAttribute("topicid", id);
