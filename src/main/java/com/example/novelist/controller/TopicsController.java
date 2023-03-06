@@ -460,18 +460,16 @@ public class TopicsController {
         return "topics/index";
     }
     
-    @RequestMapping(value = "/topics/topic.csv/{id}", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE
+    @RequestMapping(value = "/topics/{id}/csv", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE
             + "; charset=UTF-8; Content-Disposition: attachment")
     @ResponseBody
     public Object downloadCsv(@PathVariable("id") long id) throws IOException {
-    	Optional<Topic> topics = repository.findById(id);
-        Type listType = new TypeToken<List<TopicCsv>>() {
-        }.getType();
-        
-        List<TopicCsv> csv = modelMapper.map(topics, listType);
+    	Optional<Topic> topic = repository.findById(id);
+
+        TopicCsv csvRow = modelMapper.map(topic.get(), TopicCsv.class);
         CsvMapper mapper = new CsvMapper();
         CsvSchema schema = mapper.schemaFor(TopicCsv.class).withHeader();
 
-        return mapper.writer(schema).writeValueAsString(csv);
+        return mapper.writer(schema).writeValueAsString(csvRow);
     }
 }

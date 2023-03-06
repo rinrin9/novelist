@@ -61,7 +61,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         // @formatter:off
-        http.authorizeRequests().antMatchers("/", "/login", "/logout-complete", "/users/new", "/user").permitAll()
+        http.authorizeRequests().antMatchers("/", "/login", "/logout-complete", "/login-failure", "/users/new", "/user").permitAll()
                 .anyRequest().authenticated()
                 // ログアウト処理
                 .and().logout().logoutUrl("/logout").logoutSuccessUrl("/logout-complete").clearAuthentication(true)
@@ -71,7 +71,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // form
                 .and().formLogin().loginPage("/login").defaultSuccessUrl("/", false).failureUrl("/login-failure")
                 // oauth2
-                .and().oauth2Login().loginPage("/login").defaultSuccessUrl("/top").failureUrl("/login-failure")
+                .and().oauth2Login().loginPage("/login").defaultSuccessUrl("/", false).failureUrl("/login-failure")
                 .permitAll()
                 .userInfoEndpoint(userInfoEndpoint -> userInfoEndpoint
                 .oidcUserService(this.oidcUserService())
