@@ -81,13 +81,17 @@ public class CharaController {
     public String createdetails(@Validated @ModelAttribute("charaform") CharaForm charaform, BindingResult result, @PathVariable("id") Long id, 
     		@PathVariable("id") Topic topic, Model model, RedirectAttributes redirAttrs, Locale locale, UriComponentsBuilder builder)
             throws IOException {
+        
         if (result.hasErrors()) {
             model.addAttribute("hasMessage", true);
             model.addAttribute("class", "alert-danger");
             model.addAttribute("message", messageSource.getMessage("topics.create.flash.3", new String[] {}, locale));
-            return "topics/edit";
+            
+            URI location = builder.path("/charapick/" + charaform.getId()).build().toUri();
+            
+            return "redirect:" + location.toString();
         }
-
+        
         Chara entity = new Chara();
         if (charaform.getId() != null) {
         	entity =chararepository.findById(charaform.getId()).get();

@@ -8,93 +8,81 @@
 <body>
 	<div class="topics-index-wrapper" layout:fragment="contents">
 		<div class="container">
-			<div class="row">
-				<h1 class="center col-md-3 mx-auto" th:text="#{topic.home.list}"></h1>
-			</div>
-			<div class="row" th:each="topic : ${list}">
-				<div class="col-md-8 mx-auto">
-					<div id=posts>
-						<main>
-						<th:block th:if="${topic.keep == true}">
-							<table class="box-true" border="1">
-								<tr>
-									<td width="180" rowspan="2">
-							            <img src="" th:if="${@environment.getProperty('image.local')}" th:src="${topic.imageData}" class="image" />
-                                        <img src="" th:unless="${@environment.getProperty('image.local')}" th:src="${topic.path}" class="image" />
-							        </td>
-									<td width="200">
-									    <h4 class="author" th:text="#{topics.title}"></h4>
-							        </td>
-							        <td width="330">
-									    <a class="author" th:text="${topic.title}"
-										   th:href="@{'/topics/{id}'(id=${topic.id})}"></a>
-								    </td>
-								    <td>
-								        <div class="release">非公開</div>
-								    </td>
-								</tr>
-								<tr>
-								    <td>
-										<div>
-										    <a class="edit" th:text="#{topics.new.edit}"
-											   th:href="@{'/topics/edit/{id}'(id=${topic.id})}"></a> 
-											<a class="delete" th:text="#{topics.new.delete}"
-											   th:href="@{'/topics/delete/{id}'(id=${topic.id})}"></a>
-										</div>
-										
-									</td>
-									<td></td>
-									<td>
-										<div>
-											<a class="chara" th:href="@{'/chara/{id}'(id=${topic.id})}">登場人物の詳細</a>
-											<a class="chara" th:href="@{'/plot/{id}'(id=${topic.id})}">三幕構成の設定</a>
-										</div>
-									</td>
-								</tr>
-							</table>
-							</th:block>
-							<th:block th:if="${topic.keep == false}">
-							<table class="box-false" border="1">
-								<tr>
-									<td width="180" rowspan="2">
-							            <img src="" th:if="${@environment.getProperty('image.local')}" th:src="${topic.imageData}" class="image" />
-                                        <img src="" th:unless="${@environment.getProperty('image.local')}" th:src="${topic.path}" class="image" />
-							        </td>
-									<td width="200">
-									    <h4 class="author" th:text="#{topics.title}"></h4>
-							        </td>
-							        <td width="330">
-									    <a class="author" th:text="${topic.title}"
-										   th:href="@{'/topics/{id}'(id=${topic.id})}"></a>
-								    </td>
-								    <td>
-										<div class=private>公開中</div>
-								    </td>
-								</tr>
-								<tr>
-								    <td>
-										<div>
-										    <a class="edit" th:text="#{topics.new.edit}"
-											   th:href="@{'/topics/edit/{id}'(id=${topic.id})}"></a> 
-											<a class="delete" th:text="#{topics.new.delete}"
-											   th:href="@{'/topics/delete/{id}'(id=${topic.id})}"></a>
-										</div>
-										
-									</td>
-									<td></td>
-									<td>
-										<div>
-											<a class="chara" th:href="@{'/chara/{id}'(id=${topic.id})}">登場人物の設定</a>
-											<a class="chara" th:href="@{'/plot/{id}'(id=${topic.id})}">三幕構成の設定</a>
-										</div>
-									</td>
-								</tr>
-							</table>
-							</th:block>
-						</main>
-					</div>
-				</div>
-			</div>
+			<h1 class="center" th:text="#{topic.home.list}"></h1>
+			<main th:each="topic : ${list}">
+				<th:block th:if="${topic.keep == true}">
+					<table class="box-true" border="1">
+						<tr>
+							<td class="image-width" rowspan="2"><img src=""
+								th:if="${@environment.getProperty('image.local')}"
+								th:src="${topic.imageData}" class="image" /> <img src=""
+								th:unless="${@environment.getProperty('image.local')}"
+								th:src="${topic.path}" class="image" /></td>
+							<td class="title-width">
+								<h4 class="author" th:text="#{topics.title}"></h4>
+							</td>
+							<td class="titles-width"><a class="author" th:text="${topic.title}"
+								th:href="@{'/topics/{id}'(id=${topic.id})}"></a></td>
+							<td class="display-width">
+								<div class="release">非公開</div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div>
+									<a class="edit" th:text="#{topics.new.edit}"
+										th:href="@{'/topics/edit/{id}'(id=${topic.id})}"></a> <a
+										class="delete" th:text="#{topics.new.delete}"
+										th:href="@{'/topics/delete/{id}'(id=${topic.id})}"></a>
+								</div>
+							</td>
+							<td></td>
+							<td>
+								<div>
+									<a class="chara" th:href="@{'/chara/{id}'(id=${topic.id})}">登場人物の詳細</a>
+									<a class="chara" th:href="@{'/plot/{id}'(id=${topic.id})}">三幕構成の設定</a>
+								</div>
+							</td>
+						</tr>
+					</table>
+				</th:block>
+				<th:block th:if="${topic.keep == false}">
+					<table class="box-false" border="1">
+						<tr>
+							<td class="image-width" rowspan="2"><img src=""
+								th:if="${@environment.getProperty('image.local')}"
+								th:src="${topic.imageData}" class="image" /> <img src=""
+								th:unless="${@environment.getProperty('image.local')}"
+								th:src="${topic.path}" class="image" /></td>
+							<td class="title-width">
+								<h4 class="author" th:text="#{topics.title}"></h4>
+							</td>
+							<td class="titles-width"><a class="author" th:text="${topic.title}"
+								th:href="@{'/topics/{id}'(id=${topic.id})}"></a></td>
+							<td class="display-width">
+								<div class=private>公開中</div>
+							</td>
+						</tr>
+						<tr>
+							<td class="title-width">
+								<div>
+									<a class="edit" th:text="#{topics.new.edit}"
+										th:href="@{'/topics/edit/{id}'(id=${topic.id})}"></a> <a
+										class="delete" th:text="#{topics.new.delete}"
+										th:href="@{'/topics/delete/{id}'(id=${topic.id})}"></a>
+								</div>
+							</td>
+							<td></td>
+							<td>
+								<div>
+									<a class="chara" th:href="@{'/chara/{id}'(id=${topic.id})}">登場人物の設定</a>
+									<a class="chara" th:href="@{'/plot/{id}'(id=${topic.id})}">三幕構成の設定</a>
+								</div>
+							</td>
+						</tr>
+					</table>
+				</th:block>
+			</main>
 		</div>
 	</div>
 </body>

@@ -34,6 +34,8 @@ public class TopicUpdateForm {
     @Size(max = 25000)
     private String description;
     
+    private boolean keep = false;
+    
     private UserForm user;
     
     private List<FavoriteForm> favorites;

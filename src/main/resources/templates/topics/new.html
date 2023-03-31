@@ -21,11 +21,11 @@
           </div>
           <div class="mb-3">
             <label class="form-label text-black" for="topic_title" th:text="#{topics.title}">title</label>
-            <textarea class="form-control" th:field="*{title}" rows="10" th:errorclass="error-field"></textarea><p th:if="${#fields.hasErrors('title')}" class="error-message" th:errors="*{title}"></p>
+            <textarea class="form-control" th:field="*{title}" maxlength="50" rows="10" th:errorclass="error-field"></textarea><p th:if="${#fields.hasErrors('title')}" class="error-message" th:errors="*{title}"></p>
           </div>
           <div class="mb-3">
             <label class="form-label text-black" for="topic_description" th:text="#{topics.new.writing}">Writing</label>
-            <textarea class="form-control" th:field="*{description}" rows="10" th:errorclass="error-field"></textarea><p th:if="${#fields.hasErrors('description')}" class="error-message" th:errors="*{description}"></p>
+            <textarea class="form-control" th:field="*{description}" maxlength="25000" rows="10" th:errorclass="error-field"></textarea><p th:if="${#fields.hasErrors('description')}" class="error-message" th:errors="*{description}"></p>
           </div>
           <input type="submit" class="btn btn-post btn-outline-dark" th:value="#{topics.new.submit}"/>
           <div class="hyouji">

@@ -9,90 +9,78 @@
 	<div class="topics-index-wrapper" layout:fragment="contents">
 		<div class="container">
 			<th:block th:if="${listsize == 0}">
-				<h1 class=center>条件に合ったタイトルがありません。
-				</h1>
+				<h1 class=center>条件に合ったタイトルがありません。</h1>
 			</th:block>
 			<th:block th:if="${listsize != 0}">
 				<h1 class="col-md-2 mx-auto">作品一覧</h1>
-				<div class="row" th:each="topic : ${list}" th:unless="${topic.keep}">
-					<div class="col-md-8 mx-auto">
-						<main>
-							<table border="1" class="box">
-								<tr>
-									<td width="100" rowspan="2"><img src=""
-										th:if="${@environment.getProperty('image.local')}"
-										th:src="${topic.imageData}" class="image" /> <img src=""
-										th:unless="${@environment.getProperty('image.local')}"
-										th:src="${topic.path}" class="image" /></td>
-									<td width="200">
-										<h4 class="author">ユーザー名:</h4>
-									</td>
-									<td width="500">
-										<h4 class="author" th:text="${topic.user.name}"></h4>
-									</td>
-									<td>
-										<span class="new" th:data-postdate="${topic.updatedAt}">NEW</span>
-									</td>
-								</tr>
-								<tr>
+				<main  th:each="topic : ${list}" th:unless="${topic.keep}">
+					<table border="1" class="box">
+						<tr>
+							<td width="100" rowspan="2"><img src=""
+								th:if="${@environment.getProperty('image.local')}"
+								th:src="${topic.imageData}" class="image" /> <img src=""
+								th:unless="${@environment.getProperty('image.local')}"
+								th:src="${topic.path}" class="image" /></td>
+							<td width="200">
+								<h4 class="author">ユーザー名:</h4>
+							</td>
+							<td width="500">
+								<h4 class="author" th:text="${topic.user.name}"></h4>
+							</td>
+							<td><span class="new" th:data-postdate="${topic.updatedAt}">NEW</span>
+							</td>
+						</tr>
+						<tr>
 
-									<td>
-										<h3 class="author">タイトル:</h3>
-									</td>
-									<td>
-									    <a class="author author1" th:text="${topic.title}"
-										    th:href="@{'/topics/{id}'(id=${topic.id})}"></a>
-								    </td>
-								</tr>
-								<tr>
-									<td>
-										<div class="icons">
-											<a th:if="${topic.favorite != null}" rel="nofollow"
-												class="icon convert" data-method="delete"
-												href="/favorite?topic_id=1" th:href="@{'/favorite'}"
-												th:data-topic_id="${topic.id}"
-												th:data-_csrf="${_csrf.token}"> <img class="favorite-on"
-												src="/images/icons/heart.png"
-												th:src="@{/images/icons/heart.png}" />
-											</a> <a th:if="${topic.favorite == null}" rel="nofollow"
-												class="icon convert" data-method="post"
-												href="/favorite?topic_id=1" th:href="@{'/favorite'}"
-												th:data-topic_id="${topic.id}"
-												th:data-_csrf="${_csrf.token}"> <img
-												src="/images/icons/heart-black.png"
-												th:src="@{/images/icons/heart-black.png}" />
-											</a> <span class="count"
-												th:text="${#lists.size(topic.favorites)}">0</span> <a
-												href="/topics/1/comments/new"
-												th:href="@{'/topics/{id}/comments/new'(id=${topic.id})}"
-												class="icon" th:data-_csrf="${_csrf.token}"> <img
-												src="/images/icons/comment.png"
-												th:src="@{/images/icons/comment.png}" />
-											</a>
-										</div>
-									</td>
-									<td><a
-										th:href="@{'/topics/{id}/csv'(id=${topic.id})}">
-											<button type="button" name="name" value="value">CSV</button>
-									</a></td>
-									<td>
+							<td>
+								<h3 class="author">タイトル:</h3>
+							</td>
+							<td><a class="author author1" th:text="${topic.title}"
+								th:href="@{'/topics/{id}'(id=${topic.id})}"></a></td>
+						</tr>
+						<tr>
+							<td>
+								<div class="icons">
+									<a th:if="${topic.favorite != null}" rel="nofollow"
+										class="icon convert" data-method="delete"
+										href="/favorite?topic_id=1" th:href="@{'/favorite'}"
+										th:data-topic_id="${topic.id}" th:data-_csrf="${_csrf.token}">
+										<img class="favorite-on" src="/images/icons/heart.png"
+										th:src="@{/images/icons/heart.png}" />
+									</a> <a th:if="${topic.favorite == null}" rel="nofollow"
+										class="icon convert" data-method="post"
+										href="/favorite?topic_id=1" th:href="@{'/favorite'}"
+										th:data-topic_id="${topic.id}" th:data-_csrf="${_csrf.token}">
+										<img src="/images/icons/heart-black.png"
+										th:src="@{/images/icons/heart-black.png}" />
+									</a> <span class="count" th:text="${#lists.size(topic.favorites)}">0</span>
+									<a href="/topics/1/comments/new"
+										th:href="@{'/topics/{id}/comments/new'(id=${topic.id})}"
+										class="icon" th:data-_csrf="${_csrf.token}"> <img
+										src="/images/icons/comment.png"
+										th:src="@{/images/icons/comment.png}" />
+									</a>
+								</div>
+							</td>
+							<td><a th:href="@{'/topics/{id}/csv'(id=${topic.id})}">
+									<button type="button" name="name" value="value">CSV</button>
+							</a></td>
+							<td>
 
-										<div class="comments">
-											<h3 class='text-center' th:text="#{topics.index.comment}">コメント</h3>
-											<ul th:each="comment : ${topic.comments}">
-												<li><pre class="description"
-														th:text="${comment.description}"></pre></li>
-											</ul>
+								<div class="comments">
+									<h3 class='text-center' th:text="#{topics.index.comment}">コメント</h3>
+									<ul th:each="comment : ${topic.comments}">
+										<li><pre class="description"
+												th:text="${comment.description}"></pre></li>
+									</ul>
 
-										</div>
-									</td>
-								</tr>
-							</table>
-						</main>
-					</div>
-				</div>
+								</div>
+							</td>
+						</tr>
+					</table>
+				</main>
+			</th:block>
 		</div>
-		</th:block>
 	</div>
 </body>
 </html>
